@@ -1,5 +1,6 @@
 from django.shortcuts import render
 import mysql.connector as sql
+from django.contrib import messages
 email = ''
 Pword = ''
 # Create your views here.
@@ -19,7 +20,7 @@ def recipientlogin(request):
         cursor.execute(c)
         t = tuple(cursor.fetchall())
         if t == ():
-            return render(request,'donorloginerror.html')
+            messages.warning(request, 'Incorrect credentials!')
         else:
             return render(request,'recipientdashboard.html')
 
