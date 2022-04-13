@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>Admin Login</title>
+    </head>
+    <body>
+        <center><h1>Admin Login</h1></center>
+        <form action="#" method="post">
+            {% csrf_token %}
+            {% load static %}
+            <center><div class="container">
+                <label for ='email'><b>UserName:  </b></label>
+                <input type="name" placeholder="Enter username" name="username" float="right"  required><br>  
+                <label for='password'><b>Password : </b></label>
+                <input type="password" placeholder="Enter Password" name="password" required><br>  
+                <button type="submit"><b>Login</b></button><br>     
+                Don't have accounct <a href="http://localhost:8000/adminsignup/"> register </a>
+            </div></center>
+        </form>
+    </body>
+</html>
