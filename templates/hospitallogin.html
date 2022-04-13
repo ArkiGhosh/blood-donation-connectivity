@@ -1,5 +1,15 @@
 {% extends 'base.html' %}
 {%block body%}
+
+<!-- alert! -->
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-danger alert-dismissible fade show my-0" role="alert">
+  <strong>{{message}}</strong>
+</div>
+{% endfor %}
+{% endif %}
+
 <!-- carousel -->
 <div class = "container-fluid my-0 px-0 py-0" style = "z-index:0">
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
@@ -50,3 +60,4 @@ border: 1px solid rgba( 255, 255, 255, 0.18 ); padding:20px 30px">
   </form>
 </div>
 {%endblock body%}
+<!---->

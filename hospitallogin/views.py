@@ -1,5 +1,7 @@
 from django.shortcuts import render
 import mysql.connector as sql
+from django.contrib import messages
+
 pin = ''
 # Create your views here.
 def hospitallogin(request):
@@ -17,7 +19,7 @@ def hospitallogin(request):
         cursor.execute(c)
         t = tuple(cursor.fetchall())
         if t == ():
-            return render(request,'hospitalloginerror.html')
+            messages.warning(request, 'Incorrect credentials!')
         else:
             return render(request,'hospitaldashboard.html')
 
