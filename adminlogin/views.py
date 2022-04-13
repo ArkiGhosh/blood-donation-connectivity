@@ -1,5 +1,7 @@
 from django.shortcuts import render
 import mysql.connector as sql
+from django.contrib import messages
+
 Uname = ''
 Pword = ''
 # Create your views here.
@@ -19,7 +21,7 @@ def adminlogin(request):
         cursor.execute(c)
         t = tuple(cursor.fetchall())
         if t == ():
-            return render(request,'adminloginerror.html')
+            messages.success(request, 'Incorrect credentials!')
         else:
             return render(request,'admindashboard.html')
 
