@@ -34,12 +34,14 @@
 
 <div class = "container my-5" style = "font-family:Comfortaa;z-index:1; transform:translateY(-760px); width: 500px; height: 0;">
 
-<form style = "background: rgba( 255, 255, 255, 0.25 );
+<form action="#" method="post" style = "background: rgba( 255, 255, 255, 0.25 );
 box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
 backdrop-filter: blur( 4px );
 -webkit-backdrop-filter: blur( 4px );
 border-radius: 10px;
 border: 1px solid rgba( 255, 255, 255, 0.18 ); padding:20px 30px">
+{% csrf_token %}
+{% load static %}
 <h4><b>Fill in the form to sign up as donor</b></h4>
   <div class="mb-3">
     <label for="Email" class="form-label"><b>Email address</b></label>

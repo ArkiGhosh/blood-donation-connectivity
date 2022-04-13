@@ -16,9 +16,12 @@ Including another URLconf
 from django.urls import path, include
 from adminlogin.views import adminlogin
 from adminsignup.views import adminsignup
-
+from donorlogin.views import donorlogin
+from donorsignup.views  import donorsignup
 urlpatterns = [
     path('', include('BloodDonation.urls')),
     path("admin/",adminlogin,name='admin login'),
     path("adminsignup/",adminsignup,name='admin signup'),
+    path("donorlogin/",donorlogin,name='donor login'),
+    path("donorsignup/",donorsignup,name='donor signup'),
 ]

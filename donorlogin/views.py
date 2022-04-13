@@ -3,7 +3,7 @@ import mysql.connector as sql
 email = ''
 Pword = ''
 # Create your views here.
-def adminlogin(request):
+def donorlogin(request):
     global Uname,Pword
     if request.method=="POST":
         m = sql.connect(host="localhost",user="root",passwd="P@nky7050",database='DBMSproject')

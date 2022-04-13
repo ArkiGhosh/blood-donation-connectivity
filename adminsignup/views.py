@@ -1,4 +1,3 @@
-from re import U
 from django.shortcuts import render
 import mysql.connector as sql
 Uname = ''

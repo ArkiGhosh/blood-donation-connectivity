@@ -13,9 +13,3 @@ def about(request):
 
 def services(request):
     return render(request, 'services.html')
-
-def donorlogin(request):
-    return render(request, 'donorlogin.html')
-
-def donorsignup(request):
-    return render(request, 'donorsignup.html')
