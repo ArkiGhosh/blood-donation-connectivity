@@ -1,5 +1,7 @@
 from django.shortcuts import render
 import mysql.connector as sql
+from django.contrib import messages
+
 name = ''
 Pword = ''
 email =''
@@ -27,5 +29,6 @@ def recipientsignup(request):
         c = "insert into recipient Values('{}','{}','{}','{}','{}')".format(name,contact,address,email,Pword)
         cursor.execute(c)
         m.commit()
+        messages.success(request, 'Registered successfully!')
     
     return render(request,'recipientsignup.html')
