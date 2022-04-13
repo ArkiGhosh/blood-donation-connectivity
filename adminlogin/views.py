@@ -21,7 +21,7 @@ def adminlogin(request):
         cursor.execute(c)
         t = tuple(cursor.fetchall())
         if t == ():
-            messages.success(request, 'Incorrect credentials!')
+            messages.warning(request, 'Incorrect credentials!')
         else:
             return render(request,'admindashboard.html')
 
