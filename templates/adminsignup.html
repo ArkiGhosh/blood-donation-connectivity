@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>Admin Signup Page</title>
+       
+    </head>
+    <body>
+        <center><h1>Admin Sign Up Page</h1></center>
+        <form action="#" method="post">
+            {% csrf_token %}
+            {% load static %}
+            <center><div class="container">
+            	<label for ='username'><b>User Name :  </b></label>
+            	<input type="name" placeholder="Enter Username" name="username" float="right"  required><br>  
+            	<label for='password'><b>Password : </b></label>
+            	<input type="text" placeholder="Enter Password" name="password" required><br>  
+            	<button type="submit"><b>Signup</b></button><br>     
+            </div></center>
+        </form>
+    </body>
+</html>
