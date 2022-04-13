@@ -31,17 +31,22 @@
 </div>
 <div class = "container my-5" style = "font-family:Comfortaa; z-index:1; transform:translateY(-450px); width: 500px; height: 0;">
 <br>
+<form action="#" method = "post" style = "background: rgba( 255, 255, 255, 0.25 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 4px );
+-webkit-backdrop-filter: blur( 4px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 ); padding:20px 30px">
 <h4><b>Fill in the form to login as hospital</b></h4>
-<form action="#" method = "post">
   {% csrf_token %}
   {% load static %}
     <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Password</label>
-      <input type="text" class="form-control" name = "regpin" id="exampleInputPassword1" style = "background:transparent; border:1px solid black; ">
+      <label for="exampleInputPassword1" class="form-label"><b>Hospital Pin</b></label>
+      <input type="password" class="form-control" name = "regpin" id="exampleInputPassword1" style = "background:transparent; border:1px solid black; ">
     </div>
     <button type="submit" class="btn btn-primary">Login</button>
-  </form>
-<br>
+    <br><br>
 <h6><b>No account yet? Click <a href = "/hospitalsignup">here</a> to sign up now!</h6>
+  </form>
 </div>
 {%endblock body%}
