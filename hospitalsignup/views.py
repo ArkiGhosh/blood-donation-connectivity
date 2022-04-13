@@ -1,5 +1,7 @@
 from django.shortcuts import render
 import mysql.connector as sql
+from django.contrib import messages
+
 pin = ''
 name = ''
 contact = ''
@@ -22,4 +24,6 @@ def hospitalsignup(request):
         c = "insert into hospital Values('{}','{}','{}','{}')".format(pin,name,contact,address)
         cursor.execute(c)
         m.commit()
+        messages.success(request, 'Registered successfully!')
+
     return render(request, 'hospitalsignup.html')
