@@ -1,5 +1,7 @@
+from email import message
 from django.shortcuts import render
 import mysql.connector as sql
+from django.contrib import messages
 Uname = ''
 Pword = ''
 # Create your views here.
@@ -16,6 +18,8 @@ def adminsignup(request):
                 Pword = value
         
         c = "insert into admin Values('{}','{}')".format(Uname,Pword)
+        messages.success(request, 'New Admin Added!')
+        
         cursor.execute(c)
         m.commit()
     
