@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import mysql.connector as sql
 from django.contrib import messages
-
+from donordashboard.views import authenticate
 email = ''
 Pword = ''
 # Create your views here.
@@ -23,6 +23,8 @@ def donorlogin(request):
         if t == ():
             messages.warning(request, 'Incorrect credentials!')
         else:
-            return render(request,'donordashboard.html')
+            authenticate(t[0][3])
+            response = redirect('/donordashboard/')
+            return response
 
     return render(request,'donorlogin.html')

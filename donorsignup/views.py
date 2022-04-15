@@ -25,10 +25,10 @@ def donorsignup(request):
                 contact = value
             if key == "address":
                 address = value
-        messages.success(request, 'Registered successfully!')
+        
         c = "insert into donor Values('{}','{}','{}','{}','{}')".format(name,contact,address,email,Pword)
         cursor.execute(c)
         m.commit()
-        return render(request, 'donorlogin.html')
+        messages.success(request, 'Registered successfully!')
     
     return render(request,'donorsignup.html')

@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 import mysql.connector as sql
+from django.contrib import messages
+from recipientdashboard.views import authenticate
 email = ''
 Pword = ''
 # Create your views here.
@@ -19,8 +21,10 @@ def recipientlogin(request):
         cursor.execute(c)
         t = tuple(cursor.fetchall())
         if t == ():
-            return render(request,'donorloginerror.html')
+            messages.warning(request, 'Incorrect credentials!')
         else:
-            return render(request,'recipientdashboard.html')
+            authenticate(t[0][3])
+            response = redirect('/recipientdashboard/')
+            return response
 
     return render(request,'recipientlogin.html')

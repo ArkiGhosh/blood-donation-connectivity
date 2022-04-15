@@ -23,6 +23,6 @@ def adminlogin(request):
         if t == ():
             messages.warning(request, 'Incorrect credentials!')
         else:
-            return render(request,'admindashboard.html')
+            return redirect('/admindashboard')
 
     return render(request,'adminlogin.html')
