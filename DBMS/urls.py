@@ -25,6 +25,8 @@ from recipientsignup.views import recipientsignup
 from hospitaldashboard.views import hospitaldashboard
 from donordashboard.views import donordashboard
 from recipientdashboard.views import recipientdashboard
+from admindash.views import admindashboard
+
 urlpatterns = [
     path('', include('BloodDonation.urls')),
     path("admin/",adminlogin,name='admin login'),
@@ -38,4 +40,5 @@ urlpatterns = [
     path("hospitaldashboard/", hospitaldashboard,name='hospital dashboard'),
     path("donordashboard/", donordashboard,name='donor dashboard'),
     path("recipientdashboard/", recipientdashboard,name='recipient dashboard'),
+    path("admindashboard/",admindashboard,name='admin dashboard'),
 ]
