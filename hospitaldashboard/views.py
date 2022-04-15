@@ -31,7 +31,7 @@ def hospitaldashboard(request):
     c = "select * from pouch where HospitalPIN = '{}'".format(hospital_pin)
     cursor.execute(c)
     t = tuple(cursor.fetchall())
-    print(t[0][0])
+    print(t)
     if t == ():
         messages.warning(request, 'Incorrect credentials!')
     else:
