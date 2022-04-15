@@ -1,13 +1,18 @@
-from django.shortcuts import render
+import string
+from django.shortcuts import render, redirect
 import mysql.connector as sql
 from django.contrib import messages
+from hospitaldashboard.views import authenticate
 
 pin = ''
+
 # Create your views here.
 def hospitallogin(request):
+    # global hospital_pin
+    
     global Uname,Pword
     if request.method=="POST":
-        m = sql.connect(host="localhost",user="root",passwd="P@nky7050",database='DBMSproject')
+        m = sql.connect(host="localhost",user="root",passwd="Paranitrophenol@10",database='dbms_project')
         cursor = m.cursor()
         d = request.POST
         for key,value in d.items():
@@ -21,6 +26,9 @@ def hospitallogin(request):
         if t == ():
             messages.warning(request, 'Incorrect credentials!')
         else:
-            return render(request,'hospitaldashboard.html')
+            HOSPITAL_PIN = t[0][0]
+            authenticate(t[0][0])
+            response = redirect('/hospitaldashboard/')
+            return response
 
     return render(request,'hospitallogin.html')
