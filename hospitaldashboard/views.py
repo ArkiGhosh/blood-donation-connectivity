@@ -1,8 +1,6 @@
-import re
 from django.shortcuts import render, redirect
 import mysql.connector as sql
 from django.contrib import messages
-from requests import request
 # from hospitallogin.views import HOSPITAL_PIN
 import hospitallogin.views
 
@@ -20,7 +18,7 @@ def authenticate(var):
 def hospitaldashboard(request):
     # print(hospitallogin.views.HOSPITAL_PIN)
     global Uname,Pword
-    m = sql.connect(host="localhost",user="root",passwd="Paranitrophenol@10",database='dbms_project')
+    m = sql.connect(host="localhost",user="root",passwd="P@nky7050",database='DBMSproject')
     cursor = m.cursor()
     d = request.POST
     for key,value in d.items():

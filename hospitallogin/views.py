@@ -12,7 +12,7 @@ def hospitallogin(request):
     
     global Uname,Pword
     if request.method=="POST":
-        m = sql.connect(host="localhost",user="root",passwd="Paranitrophenol@10",database='dbms_project')
+        m = sql.connect(host="localhost",user="root",passwd="P@nky7050",database='DBMSproject')
         cursor = m.cursor()
         d = request.POST
         for key,value in d.items():
@@ -26,7 +26,6 @@ def hospitallogin(request):
         if t == ():
             messages.warning(request, 'Incorrect credentials!')
         else:
-            HOSPITAL_PIN = t[0][0]
             authenticate(t[0][0])
             response = redirect('/hospitaldashboard/')
             return response
