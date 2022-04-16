@@ -10,6 +10,8 @@ def authenticate(var):
     email = var
     # hospitaldashboard()
     return response
+
+    
 def donordashboard(request):
     print(email)
     messages.success(request, 'You are signed in as '+email)
