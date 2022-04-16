@@ -60,7 +60,41 @@
     {% endfor %}
     {% endif %}
     <h1>Welcome to donor dashboard</h1>
-    
+    {% for h  in hospitals %}
+      <div>
+          {{h}}
+          <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="hpin" value={{h.0}}  >
+            <input type="time" name="dontime">
+            <input type="date" name="dondate">
+            <input type="hidden" name="bookorbookings" value="book"  >
+            <button method="" type="submit" class="btn btn-primary">Book</button>
+        </form>
+        
+
+      </div>
+      
+
+    {%endfor%}
+    <div>--------------------------------------------</div>
+    {% for b  in bookings %}
+      <div>
+          {{b}}
+          <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="hpin" value={{b.0}}  >
+            <input type="hidden" name="dontime" value={{b.2.isoformat}}>
+            <input type="hidden" name="dondate" value="">
+            <input type="hidden" name="bookorbookings" value="bookings"  >
+            <button method="" type="submit" class="btn btn-primary">Delete</button>
+        </form>
+        
+
+      </div>
+      
+
+    {%endfor%}
 
 
 
