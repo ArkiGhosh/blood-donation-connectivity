@@ -18,7 +18,7 @@ def authenticate(var):
 def hospitaldashboard(request):
     # print(hospitallogin.views.HOSPITAL_PIN)
     global Uname,Pword
-    m = sql.connect(host="localhost",user="root",passwd="P@nky7050",database='DBMSproject')
+    m = sql.connect(host="localhost",user="root",passwd="Paranitrophenol@10",database='dbms_project')
     cursor = m.cursor()
     d = request.POST
     for key,value in d.items():
@@ -30,10 +30,5 @@ def hospitaldashboard(request):
     cursor.execute(c)
     t = tuple(cursor.fetchall())
     print(t)
-    if t == ():
-        messages.warning(request, 'Incorrect credentials!')
-    else:
-        messages.success(request, 'Welcome')
-        #return render(request,'hospitaldashboard.html')
 
-    return render(request,'hospitaldashboard.html')
+    return render(request,'hospitaldashboard.html', {'pouches':t})

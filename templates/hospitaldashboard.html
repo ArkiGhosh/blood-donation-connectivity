@@ -10,7 +10,29 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <title></title>
-    <style></style>
+    <script src=
+"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+    <script src=
+"https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js">
+    </script>
+    <script>
+        function showHideRow(row1, row2, row3) {
+            $("#" + row1).toggle();
+            $("#" + row2).toggle();
+            $("#" + row3).toggle();
+        }
+    </script>
+    <style>
+        th, td{
+            text-align:center;
+        }
+        .heading{
+            text-align: center;
+            font-family: Comfortaa;
+            margin-top:40px;
+        }
+    </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
@@ -62,6 +84,64 @@
         </div>
     </nav>
     
+
+    
+<div class="heading">
+    <h2>
+        <b>
+        Available Pouches
+        </b>
+    </h2>
+</div>
+
+{% block body%}
+<div class = "my-5" style="border-radius:5px !important"> 
+<table style="border-radius:10px !important;overflow:hidden; border-collapse:collapse; width:80%; margin:auto; font-family:Comfortaa;">
+    <thead class="thead-dark">
+        <tr style = "background-color:#01579B;color:white" >
+            <th scope="col"  style="padding:10px;font-size:17px;">Pouch ID</th>
+            <th scope="col"  style="padding:10px;font-size:17px">Blood Group</th>
+            <th scope="col"  style="padding:10px;font-size:17px">Booking Status</th>
+            <th scope="col"  style="padding:10px;font-size:;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for h  in pouches %}
+        <tr style="background-color:#4FC3F7">
+            <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.0}}</td>
+            <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.10}}</td>
+            <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.9}}</td>
+            <td style = "font-family:Comfortaa;font-size:17px;padding:10px">
+                    <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" onclick="showHideRow('hidden_row{{h.0}}1','hidden_row{{h.0}}2','hidden_row{{h.0}}3')">
+                        <b><i class="fa fa-angle-down" aria-hidden="true" style = "color: black"></i></b>
+                    </button>
+            </td>
+        </tr>
+        <tr id="hidden_row{{h.0}}1" class="hidden_row" style = "display:none; padding:10px; background-color:#81D4FA">
+            <td style = "padding:10px">Weight: {{h.2}}</td>
+            <td style = "padding:10px">Height: {{h.3}}</td>
+            <td style = "padding:10px">Covid Status: {{h.4}}</td>
+            <td style = "padding:10px">Age: {{h.5}}</td>
+        </tr>
+        <tr id="hidden_row{{h.0}}2" class="hidden_row" style = "display:none; padding:10px; background-color:#81D4FA">
+            <td style = "padding:10px">Volume: {{h.6}}</td>
+            <td style = "padding:10px">Gender: {{h.7}}</td>
+            <td style = "padding:10px">Donation Date: {{h.8}}</td>
+            <td style = "padding:10px">Additional Data: {{h.11}}</td>
+        </tr>
+        <tr id="hidden_row{{h.0}}3" class="hidden_row" style = "display:none; padding:5px;margin-bottom: 5px; background-color:#81D4FA">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style = "padding:5px"><button class="btn btn-primary" type="submit">Delete</button></td>
+        </tr>
+        
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+
+{% endblock body%}
 
 
 
