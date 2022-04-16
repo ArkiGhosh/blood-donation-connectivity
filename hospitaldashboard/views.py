@@ -26,7 +26,7 @@ def hospitaldashboard(request):
             pin = value
             
     print(hospital_pin)
-    c = "select * from pouch where HospitalPIN = '{}'".format(hospital_pin)
+    c = "select * from pouch where HospitalPIN = '{}' order by DonationDate".format(hospital_pin)
     cursor.execute(c)
     t = tuple(cursor.fetchall())
     print(t)
