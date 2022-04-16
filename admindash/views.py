@@ -19,6 +19,7 @@ def admindashboard(request):
     if request.method=="POST":
         cursor = m.cursor()
         d = request.POST
+
         for key,value in d.items():
             if key == "hpin":
                 hdel = value
@@ -32,7 +33,19 @@ def admindashboard(request):
                 hAddress = value
         
         if(option=='edit'):
-                
+                ss = "select * from hospital where PIN = '{}'".format(hdel)
+                cursor.execute(ss)
+                backup = cursor.fetchall()
+                print(backup)
+                if(hName == ''):
+                    hName = t[0][1]
+
+                if(hContact == ''):
+                    hContact = t[0][2]
+
+                if(hAddress == ''):
+                    hAddress = t[0][3]
+   
                 c = "update hospital set HospitalName='{}' ,HospitalContact={} , HospitalAddress='{}' where PIN='{}'".format(hName,hContact,hAddress,hdel)
                 cursor.execute(c)
                 m.commit()
