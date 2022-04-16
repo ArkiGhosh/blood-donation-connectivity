@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import mysql.connector as sql
 from django.contrib import messages
 

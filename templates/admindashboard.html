@@ -43,6 +43,14 @@
                             <i class = "fa fa-user" aria-hidden = "true"></i>
                             My Profile
                         </a></li>
+                        <li><a class="dropdown-item" href="/adminsignup" style = "font-family:Comfortaa">
+                            <i class = "fa fa-user" aria-hidden = "true"></i>
+                            Add Admin
+                        </a></li>
+                        <li><a class="dropdown-item" href="#" style = "font-family:Comfortaa">
+                            <i class = "fa fa-user" aria-hidden = "true"></i>
+                            Logout
+                        </a></li>
                     </ul>
             </div>
             </div>
@@ -51,7 +59,33 @@
     
 {% block body%}
     {% for h  in all %}
-      <div>{{h}}</div>
+      <div>
+          {{h}}
+          <form method="post">
+              {% csrf_token %}
+              <input type="hidden" name="hpin" value={{h.0}}  >
+              <input type="hidden" name="editordelete" value="delete"  >
+              <button method="" type="submit" class="btn btn-primary">Delete</button>
+          </form>
+          <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="hpin" value={{h.0}}  >
+            <div class="mb-0">
+                <label for="HospitalName" class="form-label"><b>Name</b></label>
+                <input type="text" class="form-control" name = "name" id="DonorName" aria-describedby="DonorNameHelp">
+              </div>
+                <div class="mb-0">
+                  <label for="ContactNumber" class="form-label"><b>Contact Number</b></label>
+                  <input type="number" class="form-control" name = "contact" id="ContactNumber">
+                </div>
+                <div class="mb-0">
+                  <label for="address" class="form-label"><b>Address</b></label>
+                  <input type="text" class="form-control" name ="address" id="address">
+                </div>
+                <input type="hidden" name="editordelete" value="edit"  >
+            <button method="" type="submit" class="btn btn-primary">Edit</button>
+        </form>
+        </div>
     {% endfor %}
 {% endblock body%}
 
