@@ -20,15 +20,76 @@
         font-family: Comfortaa;
         margin-top:40px;
     }
+    .scroll {
+      border: none;
+      padding: 5px;
+      font: 24px/36px sans-serif;
+      width: 200px;
+      height: 200px;
+      overflow: scroll;
+      }
+    ::-webkit-scrollbar {
+      width: 12px;
+      height: 12px;
+      }
+      ::-webkit-scrollbar-track {
+      border: 1px solid #BBDEFB;
+      border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb {
+      background: #BBDEFB;
+      border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+      background: #01579B;
+      }
+      .first{
+        display:none;
+      }
+      .first1{
+        display:none;
+      }
+
     </style>
     <script>
       function showHideRow(row1) {
         $("#" + row1).toggle();
     }
+    {% comment %} let ch1 = false, ch2 = false; {% endcomment %}
+    function change1(){
+      let e = document.querySelector('.second');
+      let e1 = document.querySelector('.second1');
+      if (e.classList.contains('first')){
+        e.classList.remove('first');
+      }
+      else{
+        e.classList.add('first');
+      }
+      if (e1.classList.contains('first1')){
+        e1.classList.add('first1');
+      }
+      
+
+    }
+    function change2(){
+      let e = document.querySelector('.second1');
+      let e1 = document.querySelector('.second');
+      if (e.classList.contains('first1')){
+        e.classList.remove('first1');
+      }
+      else{
+        e.classList.add('first1');
+      }
+      if (e1.classList.contains('first')){
+        e1.classList.add('first');
+      }
+    }
+
+
   </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
-  <body>
+  <body style ="background-color:#BBDEFB">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="/" style = "color:#87ceeb;font-family:Comfortaa">DropsOfLife |</a>
@@ -85,10 +146,21 @@
         </b>
       </h2>
 </div>
-    
-<div class = "my-5" style="border-radius:5px !important;"> 
+
+<div class="options" style = "text-align:center;padding: 10px">
+  <button class="btn btn-primary" type="button" onclick="change1()" style="margin-right:50px; padding:10px; width:200px">
+    Book slot
+</button>
+<button class="btn btn-primary" type="button" onclick="change2()" style="margin-left:50px;padding:10px; width:200px">
+  View bookings
+</button>
+</div>
+   
+
+
+<div class = "first my-5 second" style="border-radius:5px !important;"> 
 <table style="border-radius:10px !important;overflow:hidden; border-collapse:collapse; width:80%; margin:auto; font-family:Comfortaa;">
-  <h4 style="text-align:center; font-family:Comfortaa">
+  <h4 style="text-align:center; font-family:Comfortaa; padding:5px">
     <b>
         Book slots
     </b>
@@ -101,13 +173,14 @@
           <th scope="col"  style="padding:10px;font-size:;"></th>
       </tr>
     </thead>
+    
     <tbody>
         {% for h  in hospitals %}
         <tr style="background-color:#01579B;color:white; border-color:#4FC3F7">
             <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.1}}</td>
             <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.2}}</td>
             <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.3}}</td>
-            <td style = "font-family:Comfortaa;font-size:17px;padding:10px;text-align:left">
+            <td style = "font-family:Comfortaa;font-size:17px;padding:10px;text-align:center">
               <button class="btn btn-primary" type="button" onclick="showHideRow('hidden_row{{h.0}}1')">
                 Book slot
             </button>
@@ -121,7 +194,7 @@
             <td style = "padding:10px"></td>
             <td style = "padding:10px"><input type="time" name="dontime" style = "border-radius:5px"></td>
             <td style = "padding:10px"><input type="date" name="dondate" style = "border-radius:5px"></td>
-            <td style = "padding:10px"><button method="" type="submit" class="btn btn-primary">Book</button></td>
+            <td style = "padding:10px;text-align:center"><button method="" type="submit" class="btn btn-primary">Book</button></td>
           </form>
         </tr>
         
@@ -132,10 +205,11 @@
 
 
 
-    <div class = "my-5" style="border-radius:5px !important;"> 
+
+<div class = "first1 my-5 second1" style="border-radius:5px !important;"> 
       
       <table style="border-radius:10px !important;overflow:hidden; border-collapse:collapse; width:80%; margin:auto; font-family:Comfortaa;">
-        <h4 style="text-align:center; font-family:Comfortaa">
+        <h4 style="text-align:center; font-family:Comfortaa; padding:5px">
           <b>
               Your bookings
           </b>
@@ -155,16 +229,14 @@
                   <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{b.2}}</td>
                   <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{b.6}}</td>
                   <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{b.7}}</td>
-                  <td style = "font-family:Comfortaa;font-size:17px;padding:10px;text-align:left">
+                  <td style = "font-family:Comfortaa;font-size:17px;padding:10px;text-align:center;">
                     <form method="post">
                       {% csrf_token %}
                       <input type="hidden" name="hpin" value={{b.0}}  >
                       <input type="hidden" name="dontime" value={{b.2.isoformat}}>
                       <input type="hidden" name="dondate" value="">
                       <input type="hidden" name="bookorbookings" value="bookings"  >
-                    <button class="btn btn-primary" method="" type="submit">
-                      x
-                  </button>
+                  <button method="" type="submit" class="btn btn-danger" style="background-color:#B71C1C">Cancel</button>
                   </td>
               </tr>
               

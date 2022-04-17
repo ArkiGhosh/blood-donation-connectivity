@@ -32,10 +32,33 @@
             font-family: Comfortaa;
             margin-top:40px;
         }
+        .scroll {
+            border: none;
+            padding: 5px;
+            font: 24px/36px sans-serif;
+            width: 200px;
+            height: 200px;
+            overflow: scroll;
+            }
+          ::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+            }
+            ::-webkit-scrollbar-track {
+            border: 1px solid #BBDEFB;
+            border-radius: 10px;
+            }
+            ::-webkit-scrollbar-thumb {
+            background: #BBDEFB;
+            border-radius: 10px;
+            }
+            ::-webkit-scrollbar-thumb:hover {
+            background: #01579B;
+            }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
-  <body>
+  <body style ="background-color:#BBDEFB">
    
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         {% if messages %}
