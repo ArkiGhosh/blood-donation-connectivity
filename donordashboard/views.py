@@ -50,6 +50,8 @@ def donordashboard(request):
             cursor.execute(bookingq)
             m.commit()
             messages.success(request,"Slot booked")
+            return redirect('/donordashboard')
+
         else:
             dondate=dontime
             dondate=dondate.split('T')
