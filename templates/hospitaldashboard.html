@@ -146,7 +146,41 @@
     </tbody>
 </table>
 </div>
-
+<div>-------------------------------------------------------------------------</div>
+<div>
+    <form method="post">
+        {% csrf_token %}
+        Add Pouch
+        <div>
+            Weight <input type="number" name="Pwt">
+        </div>
+        <div>
+            Height <input type="number" name="Pht">
+        </div>
+        <div>
+            CovidStatus <input type="number" name="Pcs">
+        </div>
+        <div>
+            Age <input type="number" name="Page">
+        </div>
+        <div>
+            Volume <input type="number" name="Pvol">
+        </div>
+        <div>
+            Gender <input type="text" name="PG">
+        </div>
+        <div>
+            DonationDate <input type="date" name="PDD">
+        </div>
+        <div>
+            BloodGroup <input type="text" name="PBG">
+        </div>
+        <div>
+            AdditionalDate <input type="text" name="PAdd">
+        </div>
+        <div><button class="btn btn-primary" type="submit">Add Pouch</button></div>
+    </form>
+</div>
 {% endblock body%}
 
 
