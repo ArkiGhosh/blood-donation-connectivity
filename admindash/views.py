@@ -50,7 +50,13 @@ def admindashboard(request):
                 cursor.execute(c)
                 m.commit()
                 return redirect('/admindashboard')
-        else:
+        else:   
+                c = "delete from pouch where HospitalPIN='{}'".format(hdel)
+                cursor.execute(c)
+                m.commit()
+                c = "delete from donationslot where HPin='{}'".format(hdel)
+                cursor.execute(c)
+                m.commit()
                 c = "delete from hospital where PIN='{}'".format(hdel)
                 cursor.execute(c)
                 m.commit()
