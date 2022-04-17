@@ -51,6 +51,9 @@ def admindashboard(request):
                 m.commit()
                 return redirect('/admindashboard')
         else:   
+                c = "delete pouchbooking from pouchbooking inner join pouch on pouchbooking.PID = pouch.PouchID and pouch.HospitalPin='{}'".format(hdel)
+                cursor.execute(c)
+                m.commit()
                 c = "delete from pouch where HospitalPIN='{}'".format(hdel)
                 cursor.execute(c)
                 m.commit()
@@ -60,12 +63,7 @@ def admindashboard(request):
                 c = "delete from hospital where PIN='{}'".format(hdel)
                 cursor.execute(c)
                 m.commit()
-                return redirect('/admindashboard')
-
-
-
-            
-        
-        
+                
+                return redirect('/admindashboard') 
         
     return render(request,'admindashboard.html',{"all":t})
