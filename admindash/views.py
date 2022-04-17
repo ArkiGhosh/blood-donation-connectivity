@@ -10,7 +10,6 @@ hContact=''
 hAddress=''
 def admindashboard(request):
     global hdel,option,hName,hContact,hAddress
-    print("lov kumar")
     m = sql.connect(host="localhost",user="root",passwd="P@nky7050",database='DBMSproject')
     cursor = m.cursor()
     c = "select * from hospital"

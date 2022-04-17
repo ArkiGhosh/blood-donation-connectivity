@@ -9,7 +9,36 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <title>{% block title %}{% endblock title %}</title>
-    <style>{% block style%}{%endblock style %}</style>
+    <style>
+        td{
+            text-align:center;
+        }
+    </style>
+    <script src=
+"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+    <script src=
+"https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js">
+    </script>
+    <script src="index.js">
+    </script>
+    <script>
+        function showHideRow(row1) {
+            $("#" + row1).toggle();
+        }
+        function showHideRow1(row1) {
+            $("#" + row1).toggle();
+        }
+        const btn = document.getElementById('btn');
+        let index = 0;
+        const colors = ['blue', 'black'];
+        btn.addEventListener('click', function onClick() {
+        btn.style.backgroundColor = colors[index];
+        btn.style.color = 'white';
+        index = index == 0 ? 1 : 0;
+        });
+
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
@@ -57,40 +86,68 @@
         </div>
     </nav>
     
+
 {% block body%}
-    {% for h  in all %}
-      <div>
-          {{h}}
-          <form method="post">
-              {% csrf_token %}
-              <input type="hidden" name="hpin" value={{h.0}}  >
-              <input type="hidden" name="editordelete" value="delete"  >
-              <button method="" type="submit" class="btn btn-primary">Delete</button>
-          </form>
-          <form method="post">
-            {% csrf_token %}
-            <input type="hidden" name="hpin" value={{h.0}}  >
-            <div class="mb-0">
-                <label for="HospitalName" class="form-label"><b>Name</b></label>
-                <input type="text" class="form-control" name = "name" id="DonorName" aria-describedby="DonorNameHelp">
-              </div>
-                <div class="mb-0">
-                  <label for="ContactNumber" class="form-label"><b>Contact Number</b></label>
-                  <input type="number" class="form-control" name = "contact" id="ContactNumber">
-                </div>
-                <div class="mb-0">
-                  <label for="address" class="form-label"><b>Address</b></label>
-                  <input type="text" class="form-control" name ="address" id="address">
-                </div>
-                <input type="hidden" name="editordelete" value="edit"  >
-            <button method="" type="submit" class="btn btn-primary">Edit</button>
-        </form>
-        </div>
-    {% endfor %}
+<div class = "my-5" style="border-radius:5px !important;"> 
+<table style="border-radius:10px !important;overflow:hidden; border-collapse:collapse; width:80%; margin:auto; font-family:Comfortaa;">
+    <tbody>
+        {% for h  in all %}
+        <tr style="background-color:#01579B;color:white; border-color:#4FC3F7">
+            <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.1}}</td>
+            <td style = "font-family:Comfortaa;font-size:17px;padding:10px; text-align:right;">
+                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" style="color:#81D4FA !important" aria-expanded="true" aria-controls="collapseTwo" onclick="showHideRow('hidden_row{{h.0}}1')">
+                    View Details
+                </button>
+            </td>
+            <td style = "font-family:Comfortaa;font-size:17px;padding:10px;text-align:right">
+                <button class="btn btn-primary" type="button" id="btn" onclick="showHideRow('hidden_row1{{h.0}}1')">
+                    Edit
+                </button>
+            </td>
+            <td style = "font-family:Comfortaa;font-size:17px;padding:10px;text-align:left">
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="hpin" value={{h.0}}  >
+                    <input type="hidden" name="editordelete" value="delete"  >
+                    <button method="" type="submit" class="btn btn-primary">Delete</button>
+                </form>
+            </td>
+        </tr>
+        <tr id="hidden_row{{h.0}}1" class="hidden_row" style = "display:none; padding:10px; background-color:#81D4FA; border-color:#4FC3F7">
+            <td style = "padding:10px">Hospital Contact: {{h.2}}</td>
+            <td style = "padding:10px">Hospital Address: {{h.3}}</td>
+            <td style = "padding:10px"></td>
+            <td style = "padding:10px"></td>
+        </tr>
+        <tr id="hidden_row1{{h.0}}1" class="hidden_row" style = "display:none; padding:10px; background-color:#81D4FA; border-color:#4FC3F7">
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="hpin" value={{h.0}}  >
+                <td style = "padding:10px">
+                    <label for="HospitalName" class="form-label"><b>Name</b></label>
+                    <input type="text" class="form-control" name = "name" id="DonorName" aria-describedby="DonorNameHelp">
+                </td>
+                <td style = "padding:10px">
+                    <label for="ContactNumber" class="form-label"><b>Contact Number</b></label>
+                    <input type="number" class="form-control" name = "contact" id="ContactNumber">
+                </td>
+                <td style = "padding:10px">
+                    <label for="address" class="form-label"><b>Address</b></label>
+                    <input type="text" class="form-control" name ="address" id="address">
+                </td>
+                <td style = "padding:10px">
+                    <input type="hidden" name="editordelete" value="edit"  >
+                    <button method="" type="submit" class="btn btn-primary">Edit</button>
+                </td>
+            </form>
+        </tr>
+        
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+
 {% endblock body%}
-
-
-
 
 <div class="siteFooterBar py-2" style = "text-align: center">
   <div style = "font-family:Comfortaa"><h5><b>A project by</b></h6></div>
