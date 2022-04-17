@@ -21,12 +21,12 @@ def authenticate(var):
 def donordashboard(request):
     global hPIN,dontime,dondate
     print(email)
-    m = sql.connect(host="localhost",user="root",passwd="P@nky7050",database='DBMSproject')
+    m = sql.connect(host="localhost",user="root",passwd="Paranitrophenol@10",database='dbms_project')
     cursor = m.cursor()
     c = "select * from hospital"
     cursor.execute(c)
     hospitals = cursor.fetchall()
-    d="select * from donationslot where DEmail='{}'".format(email)
+    d="select * from donationslot inner join hospital on donationslot.HPin=hospital.PIN where DEmail='{}'".format(email)
     cursor.execute(d)
     bookings = cursor.fetchall()
 

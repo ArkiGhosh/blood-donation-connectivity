@@ -7,9 +7,25 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
+    <script src=
+"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+    <script src=
+"https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js">
+    </script>
     <title></title>
-    <style></style>
+    <style>
+      .heading{
+        text-align: center;
+        font-family: Comfortaa;
+        margin-top:40px;
+    }
+    </style>
+    <script>
+      function showHideRow(row1) {
+        $("#" + row1).toggle();
+    }
+  </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
@@ -59,42 +75,103 @@
     </div>
     {% endfor %}
     {% endif %}
-    <h1>Welcome to donor dashboard</h1>
-    {% for h  in hospitals %}
-      <div>
-          {{h}}
+
+
+
+<div class="heading">
+    <h2>
+        <b>
+            Welcome to Dashboard!
+        </b>
+      </h2>
+</div>
+    
+<div class = "my-5" style="border-radius:5px !important;"> 
+<table style="border-radius:10px !important;overflow:hidden; border-collapse:collapse; width:80%; margin:auto; font-family:Comfortaa;">
+  <h4 style="text-align:center; font-family:Comfortaa">
+    <b>
+        Book slots
+    </b>
+  </h4>
+    <thead class="thead-dark">
+      <tr style = "background-color:#01579B;color:white" >
+          <th scope="col"  style="padding:10px;font-size:17px;">Hospital</th>
+          <th scope="col"  style="padding:10px;font-size:17px">Contact</th>
+          <th scope="col"  style="padding:10px;font-size:17px">Address</th>
+          <th scope="col"  style="padding:10px;font-size:;"></th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for h  in hospitals %}
+        <tr style="background-color:#01579B;color:white; border-color:#4FC3F7">
+            <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.1}}</td>
+            <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.2}}</td>
+            <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.3}}</td>
+            <td style = "font-family:Comfortaa;font-size:17px;padding:10px;text-align:left">
+              <button class="btn btn-primary" type="button" onclick="showHideRow('hidden_row{{h.0}}1')">
+                Book slot
+            </button>
+            </td>
+        </tr>
+        <tr id="hidden_row{{h.0}}1" class="hidden_row" style = "display:none; padding:10px; background-color:#81D4FA; border-color:#4FC3F7">
           <form method="post">
             {% csrf_token %}
             <input type="hidden" name="hpin" value={{h.0}}  >
-            <input type="time" name="dontime">
-            <input type="date" name="dondate">
             <input type="hidden" name="bookorbookings" value="book"  >
-            <button method="" type="submit" class="btn btn-primary">Book</button>
-        </form>
+            <td style = "padding:10px"></td>
+            <td style = "padding:10px"><input type="time" name="dontime" style = "border-radius:5px"></td>
+            <td style = "padding:10px"><input type="date" name="dondate" style = "border-radius:5px"></td>
+            <td style = "padding:10px"><button method="" type="submit" class="btn btn-primary">Book</button></td>
+          </form>
+        </tr>
         
+        {% endfor %}
+    </tbody>
+</table>
+</div>
 
-      </div>
+
+
+    <div class = "my-5" style="border-radius:5px !important;"> 
       
-
-    {%endfor%}
-    <div>--------------------------------------------</div>
-    {% for b  in bookings %}
-      <div>
-          {{b}}
-          <form method="post">
-            {% csrf_token %}
-            <input type="hidden" name="hpin" value={{b.0}}  >
-            <input type="hidden" name="dontime" value={{b.2.isoformat}}>
-            <input type="hidden" name="dondate" value="">
-            <input type="hidden" name="bookorbookings" value="bookings"  >
-            <button method="" type="submit" class="btn btn-primary">Delete</button>
-        </form>
-        
-
+      <table style="border-radius:10px !important;overflow:hidden; border-collapse:collapse; width:80%; margin:auto; font-family:Comfortaa;">
+        <h4 style="text-align:center; font-family:Comfortaa">
+          <b>
+              Your bookings
+          </b>
+        </h4>
+        <thead class="thead-dark">
+          <tr style = "background-color:#01579B;color:white" >
+              <th scope="col"  style="padding:10px;font-size:17px;">Hospital</th>
+              <th scope="col"  style="padding:10px;font-size:17px">Donation Date</th>
+              <th scope="col"  style="padding:10px;font-size:17px">Hospital Contact</th>
+              <th scope="col"  style="padding:10px;font-size:17px">Address</th>
+              <th scope="col"  style="padding:10px;font-size:;"></th>
+          </tr>
+        </thead>
+            {% for b  in bookings %}
+              <tr style="background-color:#01579B;color:white; border-color:#4FC3F7">
+                  <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{b.5}}</td>
+                  <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{b.2}}</td>
+                  <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{b.6}}</td>
+                  <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{b.7}}</td>
+                  <td style = "font-family:Comfortaa;font-size:17px;padding:10px;text-align:left">
+                    <form method="post">
+                      {% csrf_token %}
+                      <input type="hidden" name="hpin" value={{b.0}}  >
+                      <input type="hidden" name="dontime" value={{b.2.isoformat}}>
+                      <input type="hidden" name="dondate" value="">
+                      <input type="hidden" name="bookorbookings" value="bookings"  >
+                    <button class="btn btn-primary" method="" type="submit">
+                      x
+                  </button>
+                  </td>
+              </tr>
+              
+              {% endfor %}
+          </tbody>
+      </table>
       </div>
-      
-
-    {%endfor%}
 
 
 
