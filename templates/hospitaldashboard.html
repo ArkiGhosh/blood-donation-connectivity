@@ -133,7 +133,13 @@
             <td></td>
             <td></td>
             <td></td>
-            <td style = "padding:5px"><button class="btn btn-primary" type="submit">Delete</button></td>
+            <td style = "padding:5px">
+                <form method="post">
+                    {% csrf_token %}
+                <input type="hidden" name="delpouch" value="{{h.0}}">
+                <button class="btn btn-primary" type="submit">Delete</button>
+                </form>
+            </td>
         </tr>
         
         {% endfor %}
