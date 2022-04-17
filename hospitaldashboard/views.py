@@ -6,11 +6,11 @@ import hospitallogin.views
 
 
 hospital_pin = ''
-
+delpouch=''
 # Create your views here.
 def authenticate(var):
     response = redirect('/hospitaldashboard/')
-    global hospital_pin 
+    global hospital_pin,delpouch
     hospital_pin = var
     # hospitaldashboard()
     return response
@@ -18,7 +18,7 @@ def authenticate(var):
 def hospitaldashboard(request):
     # print(hospitallogin.views.HOSPITAL_PIN)
     global Uname,Pword
-    m = sql.connect(host="localhost",user="root",passwd="Paranitrophenol@10",database='dbms_project')
+    m = sql.connect(host="localhost",user="root",passwd="P@nky7050",database='dbmsproject')
     cursor = m.cursor()
     d = request.POST
     for key,value in d.items():
@@ -30,5 +30,19 @@ def hospitaldashboard(request):
     cursor.execute(c)
     t = tuple(cursor.fetchall())
     print(t)
+    if request.method=="POST":
+        cursor = m.cursor()
+        d = request.POST
+
+        for key,value in d.items():
+            if key == "delpouch":
+                delpouch = value
+        c="delete from pouchbooking where PID={}".format(delpouch)
+        cursor.execute(c)
+        m.commit()
+        c="delete from pouch where PouchID={}".format(delpouch)
+        cursor.execute(c)
+        m.commit()
+        return redirect("/hospitaldashboard")
 
     return render(request,'hospitaldashboard.html', {'pouches':t})
