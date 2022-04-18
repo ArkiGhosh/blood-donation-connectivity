@@ -159,12 +159,14 @@
 
 
 <div class = "first my-5 second" style="border-radius:5px !important;"> 
-<table style="border-radius:10px !important;overflow:hidden; border-collapse:collapse; width:80%; margin:auto; font-family:Comfortaa;">
   <h4 style="text-align:center; font-family:Comfortaa; padding:5px">
     <b>
         Book slots
     </b>
   </h4>
+<div style = "overflow:auto; height:400px;">
+<table style="border-radius:10px !important;overflow:hidden; border-collapse:collapse; width:80%; margin:auto; font-family:Comfortaa;">
+  
     <thead class="thead-dark">
       <tr style = "background-color:#01579B;color:white" >
           <th scope="col"  style="padding:10px;font-size:17px;">Hospital</th>
@@ -174,7 +176,7 @@
       </tr>
     </thead>
     
-    <tbody>
+    <tbody >
         {% for h  in hospitals %}
         <tr style="background-color:#01579B;color:white; border-color:#4FC3F7">
             <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.1}}</td>
@@ -202,18 +204,21 @@
     </tbody>
 </table>
 </div>
-
+</div>
 
 
 
 <div class = "first1 my-5 second1" style="border-radius:5px !important;"> 
       
+<h4 style="text-align:center; font-family:Comfortaa; padding:5px">
+  <b>
+      Your bookings
+  </b>
+</h4>
+<div style = "overflow:auto; height:400px;">
       <table style="border-radius:10px !important;overflow:hidden; border-collapse:collapse; width:80%; margin:auto; font-family:Comfortaa;">
-        <h4 style="text-align:center; font-family:Comfortaa; padding:5px">
-          <b>
-              Your bookings
-          </b>
-        </h4>
+        
+        
         <thead class="thead-dark">
           <tr style = "background-color:#01579B;color:white" >
               <th scope="col"  style="padding:10px;font-size:17px;">Hospital</th>
@@ -243,6 +248,7 @@
               {% endfor %}
           </tbody>
       </table>
+    </div>
       </div>
 
 
