@@ -30,6 +30,10 @@ def donordashboard(request):
     cursor.execute(d)
     bookings = cursor.fetchall()
 
+    c = "select * from donor where donoremail = '{}'".format(email)
+    cursor.execute(c)
+    donorprofile = tuple(cursor.fetchall()) # use for profile
+    print(donorprofile)
     
     if request.method=="POST":
         cursor = m.cursor()

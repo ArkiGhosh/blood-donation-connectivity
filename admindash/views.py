@@ -8,6 +8,14 @@ option=''
 hName=''
 hContact=''
 hAddress=''
+username=''
+def authenticate(var):
+    response = redirect('/admindashboard/')
+    global username
+    username = var
+    # hospitaldashboard()
+    return response
+
 def admindashboard(request):
     global hdel,option,hName,hContact,hAddress
     m = sql.connect(host="localhost",user="root",passwd="P@nky7050",database='DBMSproject')
@@ -15,6 +23,12 @@ def admindashboard(request):
     c = "select * from hospital"
     cursor.execute(c)
     t = cursor.fetchall()
+    print(username)
+    print("admin")
+    c = "select * from admin where username = '{}'".format(username)
+    cursor.execute(c)
+    adminprofile = tuple(cursor.fetchall()) # use for profile
+    print(adminprofile)
     if request.method=="POST":
         cursor = m.cursor()
         d = request.POST

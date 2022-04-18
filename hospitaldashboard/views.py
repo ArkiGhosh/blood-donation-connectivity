@@ -47,6 +47,12 @@ def hospitaldashboard(request):
     cursor.execute(c)
     t = tuple(cursor.fetchall())
     print(t)
+
+    c = "select * from hospital where PIN = '{}'".format(hospital_pin)
+    cursor.execute(c)
+    hospitalprofile = tuple(cursor.fetchall()) # use for profile
+    print(hospitalprofile)
+
     if request.method=="POST":
         cursor = m.cursor()
         d = request.POST
@@ -81,7 +87,7 @@ def hospitaldashboard(request):
             m.commit()
             return redirect("/hospitaldashboard")
         else:
-            c = "select * from pouch".format(hospital_pin)
+            c = "select * from pouch"
             cursor.execute(c)
             t = tuple(cursor.fetchall())  
             c = "select max(PouchID) from pouch"
@@ -93,7 +99,10 @@ def hospitaldashboard(request):
                 pouchid = 1
             else:
                 pouchid=pouchid[0][0]+1
+
+
             
+
             c = "insert into pouch values({},'{}',{},{},{},{},{},'{}','{}',{},'{}','{}')".format(pouchid,hospital_pin,Pwt,Pht,Pcs,Page,Pvol,PG,PDD,PiB,PBG,PAdd)
             cursor.execute(c)
             m.commit()
