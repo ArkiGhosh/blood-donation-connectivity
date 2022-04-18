@@ -21,7 +21,7 @@ def authenticate(var):
 def donordashboard(request):
     global hPIN,dontime,dondate
     print(email)
-    m = sql.connect(host="localhost",user="root",passwd="Paranitrophenol@10",database='dbms_project')
+    m = sql.connect(host="localhost",user="root",passwd="P@nky7050",database='dbmsproject')
     cursor = m.cursor()
     c = "select * from hospital"
     cursor.execute(c)
