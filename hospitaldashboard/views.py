@@ -86,13 +86,12 @@ def hospitaldashboard(request):
             cursor.execute(c)
 
             pouchid = cursor.fetchall()
-
-            if(len(pouchid)==0):# if new hospital
+            print(pouchid)
+            print("test")
+            if(len(t)==0):# if new hospital
                 pouchid = 1
-            
             else:
-                pouchid=pouchid[0][0]
-                pouchid+=1
+                pouchid=pouchid[0][0]+1
             
             c = "insert into pouch values({},'{}',{},{},{},{},{},'{}','{}',{},'{}','{}')".format(pouchid,hospital_pin,Pwt,Pht,Pcs,Page,Pvol,PG,PDD,PiB,PBG,PAdd)
             cursor.execute(c)
