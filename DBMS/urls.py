@@ -22,9 +22,9 @@ from hospitallogin.views import hospitallogin
 from hospitalsignup.views import hospitalsignup
 from recipientlogin.views import recipientlogin
 from recipientsignup.views import recipientsignup
-from hospitaldashboard.views import hospitaldashboard
-from donordashboard.views import donordashboard
-from recipientdashboard.views import recipientdashboard
+from hospitaldashboard.views import hospitaldashboard, hospitalprofile
+from donordashboard.views import donordashboard, donorprofile
+from recipientdashboard.views import recipientdashboard, recipientprofile
 from admindash.views import admindashboard
 
 urlpatterns = [
@@ -41,4 +41,7 @@ urlpatterns = [
     path("donordashboard/", donordashboard,name='donor dashboard'),
     path("recipientdashboard/", recipientdashboard,name='recipient dashboard'),
     path("admindashboard/",admindashboard,name='admin dashboard'),
+    path("donorprofile/", donorprofile, name = 'donor profile'),
+    path("hospitalprofile/", hospitalprofile, name = 'hospital profile'),
+    path("recipientprofile/", recipientprofile, name = 'recipient profile'),
 ]

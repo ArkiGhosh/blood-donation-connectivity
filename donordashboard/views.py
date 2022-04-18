@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 import mysql.connector as sql
 from django.contrib import messages
 
+donorp = ''
 email = ''
 hPIN=''
 dontime=''
@@ -16,12 +17,13 @@ def authenticate(var):
     # hospitaldashboard()
     return response
 
-
+def donorprofile(request):
+    return render(request, 'donorprofile.html', {'dp':donorp})
 
 def donordashboard(request):
     global hPIN,dontime,dondate
     print(email)
-    m = sql.connect(host="localhost",user="root",passwd="P@nky7050",database='dbmsproject')
+    m = sql.connect(host="localhost",user="root",passwd="Paranitrophenol@10",database='dbms_project')
     cursor = m.cursor()
     c = "select * from hospital"
     cursor.execute(c)
@@ -32,8 +34,9 @@ def donordashboard(request):
 
     c = "select * from donor where donoremail = '{}'".format(email)
     cursor.execute(c)
-    donorprofile = tuple(cursor.fetchall()) # use for profile
-    print(donorprofile)
+    global donorp
+    donorp = tuple(cursor.fetchall()) # use for profile
+    print(donorp)
     
     if request.method=="POST":
         cursor = m.cursor()

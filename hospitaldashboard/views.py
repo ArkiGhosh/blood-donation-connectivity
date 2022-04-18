@@ -8,6 +8,7 @@ from datetime import datetime, timedelta
 hospital_pin = ''
 delpouch=''
 deletebooking=''
+hospp=''
 
 Pwt=''
 Pht=''
@@ -33,10 +34,13 @@ def authenticate(var):
     # hospitaldashboard()
     return response
 
+def hospitalprofile(request):
+    return render(request, 'hospitalprofile.html', {'dp':hospp})
+
 def hospitaldashboard(request):
     # print(hospitallogin.views.HOSPITAL_PIN)
     global Uname,Pword,delpouch,Pwt,Pht,Pcs,Page,Pvol,PG,PDD,PiB,PBG,PAdd,BookDate,Bookemail,BookPID,BookTime,deletebooking
-    m = sql.connect(host="localhost",user="root",passwd="P@nky7050",database='dbmsproject')
+    m = sql.connect(host="localhost",user="root",passwd="Paranitrophenol@10",database='dbms_project')
     cursor = m.cursor()
     date42 = datetime.today() - timedelta(days = 42 )
     c = "delete pouchbooking from pouchbooking inner join pouch on pouchbooking.PID = pouch.PouchID and pouch.DonationDate < '{}'".format(date42)
@@ -66,6 +70,12 @@ def hospitaldashboard(request):
     c="select * from pouchbooking inner join pouch on pouch.PouchID=pouchbooking.PID where pouch.HospitalPIN='{}'".format(hospital_pin)
     cursor.execute(c)
     recbook=tuple(cursor.fetchall())
+
+    c = "select * from hospital where PIN = '{}'".format(hospital_pin)
+    cursor.execute(c)
+    global hospp
+    hospp = tuple(cursor.fetchall()) # use for profile
+    print(hospp)
 
 
     if request.method=="POST":

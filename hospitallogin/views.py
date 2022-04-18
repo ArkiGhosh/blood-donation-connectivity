@@ -12,7 +12,7 @@ def hospitallogin(request):
     
     global Uname,Pword
     if request.method=="POST":
-        m = sql.connect(host="localhost",user="root",passwd="P@nky7050",database='DBMSproject')
+        m = sql.connect(host="localhost",user="root",passwd="Paranitrophenol@10",database='dbms_project')
         cursor = m.cursor()
         d = request.POST
         for key,value in d.items():
