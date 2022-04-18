@@ -35,7 +35,7 @@ def authenticate(var):
 
 def hospitaldashboard(request):
     # print(hospitallogin.views.HOSPITAL_PIN)
-    global Uname,Pword,delpouch,Pwt,Pht,Pcs,Page,Pvol,PG,PDD,PiB,PBG,PAdd,BookDate,Bookemail,BookPID,BookTime
+    global Uname,Pword,delpouch,Pwt,Pht,Pcs,Page,Pvol,PG,PDD,PiB,PBG,PAdd,BookDate,Bookemail,BookPID,BookTime,deletebooking
     m = sql.connect(host="localhost",user="root",passwd="P@nky7050",database='dbmsproject')
     cursor = m.cursor()
     date42 = datetime.today() - timedelta(days = 42 )
