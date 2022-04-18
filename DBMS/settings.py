@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'payment',
     'django.contrib.staticfiles',
 ]
 
@@ -112,9 +111,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
-RAZOR_KEY_ID = 'rzp_test_a7HRH7NZ1dYp2d'
-RAZOR_KEY_SECRET = 'bSojHBjdIgWBTlsN8SjbmBrX'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
