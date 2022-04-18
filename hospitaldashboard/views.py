@@ -81,14 +81,15 @@ def hospitaldashboard(request):
             m.commit()
             return redirect("/hospitaldashboard")
         else:
-                
-            c = "select max(PouchID) from pouch where HospitalPIN = '{}' order by DonationDate".format(hospital_pin)
+            c = "select * from pouch".format(hospital_pin)
             cursor.execute(c)
-
+            t = tuple(cursor.fetchall())  
+            c = "select max(PouchID) from pouch"
+            cursor.execute(c)
             pouchid = cursor.fetchall()
             print(pouchid)
             print("test")
-            if(len(t)==0):# if new hospital
+            if(len(t)==0):# if first most hospital
                 pouchid = 1
             else:
                 pouchid=pouchid[0][0]+1
