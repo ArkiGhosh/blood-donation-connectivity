@@ -99,7 +99,4 @@ def hospitaldashboard(request):
             m.commit()
             return redirect("/hospitaldashboard")
 
-        
-
-
     return render(request,'hospitaldashboard.html', {'pouches':t})
