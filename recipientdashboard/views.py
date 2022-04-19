@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 import mysql.connector as sql
 from django.contrib import messages
+from datetime import datetime, timedelta
 
 email = ''
 recipp = ''
@@ -24,6 +25,15 @@ def recipientdashboard(request):
     global recipp
     recipp = tuple(cursor.fetchall()) # use for profile
     print(recipp)
+
+    #auto deletion code snippet
+    date42 = datetime.today() - timedelta(days = 42 )
+    c = "delete pouchbooking from pouchbooking inner join pouch on pouchbooking.PID = pouch.PouchID and pouch.DonationDate < '{}'".format(date42)
+    cursor.execute(c)
+    m.commit()
+    c="delete from pouch where DonationDate < '{}'".format(date42)
+    cursor.execute(c)
+    m.commit()
     #showing only non booked blood pouches
     c = "select * from pouch inner join hospital on hospital.pin = pouch.hospitalpin where isbooked = 0"
     cursor.execute(c)
@@ -38,5 +48,5 @@ def recipientdashboard(request):
     cursor.execute(d) 
     bookings = tuple(cursor.fetchall())
     messages.success(request, 'You are signed in as '+email)
-    
+
     return render(request,'recipientdashboard.html',{'ubp':unbookedpouch,'mb':bookings})
