@@ -38,4 +38,5 @@ def recipientdashboard(request):
     cursor.execute(d) 
     bookings = tuple(cursor.fetchall())
     messages.success(request, 'You are signed in as '+email)
+    
     return render(request,'recipientdashboard.html',{'ubp':unbookedpouch,'mb':bookings})
