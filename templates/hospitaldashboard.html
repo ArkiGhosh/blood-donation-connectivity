@@ -26,6 +26,7 @@
     <style>
         th, td{
             text-align:center;
+            padding:10px;
         }
         .heading{
             text-align: center;
@@ -55,7 +56,120 @@
             ::-webkit-scrollbar-thumb:hover {
             background: #01579B;
             }
+            .pouchadd{
+                border-radius:35px;
+                background-color:#01579B;
+                color:white;
+                padding: 20px;
+                margin-top:50px;
+                margin-bottom:50px;
+                width: 40%;
+                font-family: Comfortaa;
+                text-align:left;
+            }
+            .first{
+                display:none;
+              }
+              .first1{
+                display:none;
+              }
+              .first2{
+                display:none;
+              }
+              .first3{
+                display:none;
+              }
     </style>
+    <script>
+        function change1(){
+            let e = document.querySelector('.second');
+            let e1 = document.querySelector('.second1');
+            let e2 = document.querySelector('.second2');
+            let e3 = document.querySelector('.second3');
+            if (e.classList.contains('first')){
+              e.classList.remove('first');
+            }
+            else{
+              e.classList.add('first');
+            }
+            if (e1.classList.contains('first1')){
+              e1.classList.add('first1');
+            }
+            if (e2.classList.contains('first2')){
+                e2.classList.add('first2');
+              }
+            if (e3.classList.contains('first3')){
+                e3.classList.add('first3');
+            }
+      
+          }
+          function change2(){
+            let e = document.querySelector('.second');
+            let e1 = document.querySelector('.second1');
+            let e2 = document.querySelector('.second2');
+            let e3 = document.querySelector('.second3');
+            if (e1.classList.contains('first1')){
+              e1.classList.remove('first1');
+            }
+            else{
+              e1.classList.add('first1');
+            }
+            if (e.classList.contains('first')){
+              e.classList.add('first');
+            }
+            if (e2.classList.contains('first2')){
+                e2.classList.add('first2');
+              }
+            if (e3.classList.contains('first3')){
+                e3.classList.add('first3');
+            }
+            
+          }
+          function change3(){
+            let e = document.querySelector('.second');
+            let e1 = document.querySelector('.second1');
+            let e2 = document.querySelector('.second2');
+            let e3 = document.querySelector('.second3');
+            if (e2.classList.contains('first2')){
+              e2.classList.remove('first2');
+            }
+            else{
+              e2.classList.add('first2');
+            }
+            if (e1.classList.contains('first1')){
+              e1.classList.add('first1');
+            }
+            if (e.classList.contains('first')){
+                e.classList.add('first');
+              }
+              if (e3.classList.contains('first3')){
+                e3.classList.add('first3');
+            }
+      
+          }
+          function change4(){
+            let e = document.querySelector('.second');
+            let e1 = document.querySelector('.second1');
+            let e2 = document.querySelector('.second2');
+            let e3 = document.querySelector('.second3');
+            if (e3.classList.contains('first3')){
+              e3.classList.remove('first3');
+            }
+            else{
+              e3.classList.add('first3');
+            }
+            if (e1.classList.contains('first1')){
+              e1.classList.add('first1');
+            }
+            if (e2.classList.contains('first2')){
+                e2.classList.add('first2');
+              }
+              if (e.classList.contains('first')){
+                e.classList.add('first');
+            }
+      
+          }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body style ="background-color:#BBDEFB">
@@ -116,22 +230,31 @@
         </b>
     </h2>
 </div>
-<div class="options" style = "text-align:center;padding: 10px">
+<div class="options" style = "text-align:center;padding: 10px; margin-top:30px">
     <button class="btn btn-primary" type="button" onclick="change1()" style="margin-right:50px; padding:10px; width:200px">
       View Pouches
   </button>
   <button class="btn btn-primary" type="button" onclick="change2()" style="margin-left:50px;padding:10px; width:200px">
     Add pouches
   </button>
-  <button class="btn btn-primary" type="button" onclick="change2()" style="margin-left:50px;padding:10px; width:200px">
+  <button class="btn btn-primary" type="button" onclick="change3()" style="margin-left:50px;padding:10px; width:200px">
     View Pouch Bookings
   </button>
-  <button class="btn btn-primary" type="button" onclick="change2()" style="margin-left:50px;padding:10px; width:200px">
+  <button class="btn btn-primary" type="button" onclick="change4()" style="margin-left:50px;padding:10px; width:200px">
     View Donation Bookings
   </button>
   </div>
 {% block body%}
-<div class = "my-5" style="border-radius:5px !important"> 
+
+<div class = "first second">
+<div class="heading">
+    <h2>
+        <b>
+        All pouches
+        </b>
+    </h2>
+</div>
+<div class = "my-5" style="border-radius:5px !important;overflow:auto; height:250px;"> 
 <table style="border-radius:10px !important;overflow:hidden; border-collapse:collapse; width:80%; margin:auto; font-family:Comfortaa;">
     <thead class="thead-dark">
         <tr style = "background-color:#01579B;color:white" >
@@ -182,65 +305,151 @@
     </tbody>
 </table>
 </div>
-<div>-------------------------------------------------------------------------</div>
-<div>
-    <form method="post">
-        {% csrf_token %}
-        Add Pouch
-        <div>
-            Weight <input type="number" name="Pwt">
-        </div>
-        <div>
-            Height <input type="number" name="Pht">
-        </div>
-        <div>
-            CovidStatus <input type="number" name="Pcs">
-        </div>
-        <div>
-            Age <input type="number" name="Page">
-        </div>
-        <div>
-            Volume <input type="number" name="Pvol">
-        </div>
-        <div>
-            Gender <input type="text" name="PG">
-        </div>
-        <div>
-            DonationDate <input type="date" name="PDD">
-        </div>
-        <div>
-            BloodGroup <input type="text" name="PBG">
-        </div>
-        <div>
-            AdditionalDate <input type="text" name="PAdd">
-        </div>
-        <input 
-        <div><button class="btn btn-primary" type="submit">Add Pouch</button></div>
-    </form>
 </div>
-<div>---------------------------------------------------------------------------------------</div>
-<div>
-    {% for slot in slots %}
-    {{slot}}
-    {%endfor%}
 
+
+<div class = "first1 second1">
+<div class = "pouchadd container-fluid form-group" style="font-family:Comfortaa;">
+    <h4 class = "my-3" style="text-align:center">Add Pouch</h4>
+    <table style="border-radius:10px !important;overflow:hidden; border-collapse:collapse; width:100%; margin:auto; font-family:Comfortaa;">
+        <form method="post">
+            {% csrf_token %}
+        <tbody>
+            <tr>
+                <td><label>Weight</label></td>
+                <td><input type="number" name="Pwt" class="form-control"></td>
+                <td><label>Height</label></td>
+                <td><input type="number" name="Pht" class="form-control"></td>
+            </tr>
+            <tr>
+                <td><label>Covid Status</label></td>
+                <td><select class="form-select" name = "Pcs" aria-label="Default select example">
+                    <option selected>Covid status</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select></td>
+                <td><label>Age</label></td>
+                <td><input type="number" name="Page" class="form-control"></td>
+            </tr>
+            <tr>
+                <td><label>Volume</label></td>
+                <td><input type="number" name="Pvol" class="form-control"></td>
+                <td><label>Gender</label></td>
+                <td><select class="form-select" name = "PG" aria-label="Default select example">
+                    <option selected>Choose gender</option>
+                    <option value="M">M</option>
+                    <option value="F">F</option>
+                </select></td>
+            </tr>
+            <tr>
+                <td><label>Donation Date</label></td>
+                <td><input type="date" name="PDD" class="form-control"></td>
+                <td><label>Blood Group</label></td>
+                <td><select class="form-select" name = "PBG" aria-label="Default select example">
+                        <option selected>Choose blood group</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                </select></td>
+            </tr>
+            <tr>
+                <td colspan="1"><label>Additional Data</label></td>
+                <td colspan="3"><input type="text" name="PAdd" class="form-control"></td>
+            </tr>
+            <tr><td colspan="4"><div class="my-3"><button class="btn btn-primary" type="submit">Add Pouch</button></div></td></tr>
+    </form>
+</tbody>
+</table>
 </div>
-<div>---------------------------------------------------------------------------------------</div>
-<div>
-    {% for book in recbook %}
-    {{book}}
-    <form method="post">
-        {%csrf_token%}
-        <input type="hidden" name="Bookemail" value="{{book.0}}">
-        <input type="hidden" name="BookPID" value="{{book.1}}">
-        <input type="hidden" name="BookTime" value="{{book.2.isoformat}}">
-        <input type="hidden" name="BookDate" value="">
-        <input type="hidden" name="deletebooking" value="delete">
-        <button class="btn btn-primary" type="submit">Procesed Booking</button>
-        <br>
-    {%endfor%}
-    
 </div>
+
+<div class = "first2 second2">
+<div class="heading">
+    <h2>
+        <b>
+        Pouch bookings
+        </b>
+    </h2>
+</div>
+<div class = "my-5" style="border-radius:5px !important"> 
+<table style="border-radius:10px !important;overflow:hidden; border-collapse:collapse; width:80%; margin:auto; font-family:Comfortaa;">
+    <thead class="thead-dark">
+        <tr style = "background-color:#01579B;color:white" >
+            <th scope="col"  style="padding:10px;font-size:17px;">Name</th>
+            <th scope="col"  style="padding:10px;font-size:17px">Contact</th>
+            <th scope="col"  style="padding:10px;font-size:17px">Email</th>
+            <th scope="col"  style="padding:10px;font-size:17px">Address</th>
+            <th scope="col"  style="padding:10px;font-size:;">Pouch ID</th>
+            <th scope="col"  style="padding:10px;font-size:;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book  in recbook %}
+        <tr style="background-color:#4FC3F7">
+            <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{book.16}}</td>
+            <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{book.17}}</td>
+            <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{book.12}}</td>
+            <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{book.18}}</td>
+            <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{book.0}}</td>
+            <td style = "padding:5px">
+                <form method="post">
+                    {%csrf_token%}
+                    <input type="hidden" name="Bookemail" value="{{book.12}}">
+                    <input type="hidden" name="BookPID" value="{{book.0}}">
+                    <input type="hidden" name="BookTime" value="{{book.8.isoformat}}">
+                    <input type="hidden" name="BookDate" value="">
+                    <input type="hidden" name="deletebooking" value="delete">
+                    <button class="btn btn-primary" type="submit" style="margin-top:2px;margin-bottom:2px;">Procesed Booking</button>
+            </td>
+        </tr>
+        
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+</div>
+
+
+<div class = "first3 second3">
+<div class="heading">
+    <h2>
+        <b>
+        Donation slot bookings
+        </b>
+    </h2>
+</div>
+<div class = "my-5" style="border-radius:5px !important"> 
+    <table style="border-radius:10px !important;overflow:hidden; border-collapse:collapse; width:80%; margin:auto; font-family:Comfortaa;">
+        <thead class="thead-dark">
+            <tr style = "background-color:#01579B;color:white" >
+                <th scope="col"  style="padding:10px;font-size:17px;">Donor name</th>
+                <th scope="col"  style="padding:10px;font-size:17px;">Donor email</th>
+                <th scope="col"  style="padding:10px;font-size:17px;">Contact number</th>
+                <th scope="col"  style="padding:10px;font-size:17px;">Donor address</th>
+                <th scope="col"  style="padding:10px;font-size:17px">Donation time and date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for slot in slots %}
+            <tr style="background-color:#4FC3F7">
+                <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{slot.4}}</td>
+                <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{slot.1}}</td>
+                <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{slot.5}}</td>
+                <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{slot.6}}</td>
+                <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{slot.2}}</td>
+                
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
+</div>
+
 
 {% endblock body%}
 

@@ -62,12 +62,12 @@ def hospitaldashboard(request):
     #donorbookings-> 24hr from current time
     Current_Date = datetime.today()
     NextDay_Date = datetime.today() + timedelta(days=1)
-    c="select * from donationslot where HPin='{}' and DonationTime>='{}' and DonationTime<='{}'".format(hospital_pin,Current_Date,NextDay_Date)
+    c="select * from donationslot inner join donor on donor.donoremail = donationslot.demail where HPin='{}' and DonationTime>='{}' and DonationTime<='{}'".format(hospital_pin,Current_Date,NextDay_Date)
     print(c)
     cursor.execute(c)
     slots=tuple(cursor.fetchall())
     #receipentbookings
-    c="select * from pouchbooking inner join pouch on pouch.PouchID=pouchbooking.PID where pouch.HospitalPIN='{}'".format(hospital_pin)
+    c="select * from pouch inner join pouchbooking inner join recipient on recipient.recipientemail = pouchbooking.remail on pouch.PouchID=pouchbooking.PID where pouch.HospitalPIN='{}'".format(hospital_pin)
     cursor.execute(c)
     recbook=tuple(cursor.fetchall())
 
