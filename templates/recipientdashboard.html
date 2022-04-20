@@ -34,36 +34,6 @@
             background: #01579B;
             }
     </style>
-    <script>
-      function change1(){
-        let e = document.querySelector('.second');
-        let e1 = document.querySelector('.second1');
-        if (e.classList.contains('first')){
-          e.classList.remove('first');
-        }
-        else{
-          e.classList.add('first');
-        }
-        if (e1.classList.contains('first1')){
-          e1.classList.add('first1');
-        }
-        
-  
-      }
-      function change2(){
-        let e = document.querySelector('.second1');
-        let e1 = document.querySelector('.second');
-        if (e.classList.contains('first1')){
-          e.classList.remove('first1');
-        }
-        else{
-          e.classList.add('first1');
-        }
-        if (e1.classList.contains('first')){
-          e1.classList.add('first');
-        }
-      }
-    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body style ="background-color:#BBDEFB">
@@ -127,60 +97,8 @@
     <button class="btn btn-primary" type="button" onclick="change2()" style="margin-left:50px;padding:10px; width:200px">
       View Pouch Bookings
     </button>
-     <!-- First display blood group, hospital name, address, contact and give drop down option 
-      for all additional information of the pouch and then book pouch button -->
-    <div class = "first my-5 second" style="border-radius:5px !important;"> 
-      <h4 style="text-align:center; font-family:Comfortaa; padding:5px">
-        <b>
-            Book Pouches
-        </b>
-      </h4>
-    <div style = "overflow:auto; height:400px;">
-    <table style="border-radius:10px !important;overflow:hidden; border-collapse:collapse; width:80%; margin:auto; font-family:Comfortaa;">
-      
-        <thead class="thead-dark">
-          <tr style = "background-color:#01579B;color:white" >
-              <th scope="col"  style="padding:10px;font-size:17px;">Blood Group</th>
-              <th scope="col"  style="padding:10px;font-size:17px">Hospital Name</th>
-              <th scope="col"  style="padding:10px;font-size:17px">Address</th>
-              <th scope="col"  style="padding:10px;font-size:17px">Contact Number</th>
-              <th scope="col"  style="padding:10px;font-size:;"></th>
-          </tr>
-        </thead>
-        
-        <tbody >
-            {% for h  in ubp %}
-            <tr style="background-color:#01579B;color:white; border-color:#4FC3F7">
-                <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.10}}</td>
-                <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.13}}</td>
-                <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.15}}</td>
-                <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.14}}</td>
-                <td style = "font-family:Comfortaa;font-size:17px;padding:10px;text-align:center">
-                  <button class="btn btn-primary" type="button" onclick="showHideRow('hidden_row{{h.0}}1')">
-                    Book Pouch
-                </button>
-                </td>
-            </tr>
-            <tr id="hidden_row{{h.0}}1" class="hidden_row" style = "display:none; padding:10px; background-color:#81D4FA; border-color:#4FC3F7">
-              <form method="post">
-                {% csrf_token %}
-                <input type="hidden" name="hpin" value={{h.0}}  >
-                <input type="hidden" name="bookorbookings" value="book"  >
-                <td style = "padding:10px"></td>
-                <td style = "padding:10px"><input type="time" name="dontime" style = "border-radius:5px"></td>
-                <td style = "padding:10px"><input type="date" name="dondate" style = "border-radius:5px"></td>
-                <td style = "padding:10px;text-align:center"><button method="" type="submit" class="btn btn-primary">Book</button></td>
-              </form>
-            </tr>
-            
-            {% endfor %}
-        </tbody>
-    </table>
-    </div>
-    </div>
    
     </div>
-    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Filter Pouches">
     {% for h  in ubp %}
         {{h}}
         <tr style="background-color:#01579B;color:white; border-color:#4FC3F7">
@@ -188,21 +106,21 @@
             <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.2}}</td>
             <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.3}}</td>
             <td style = "font-family:Comfortaa;font-size:17px;padding:10px;text-align:center">
-            <form method="post">
-              {% csrf_token %}
-              <input type="hidden" name="pouchid" value="{{h.0}}">
-              <button class="btn btn-primary" type="submit" id="pay-btn">
-
-
-                Book pouch
-
-                
-              </button>
-            </form>
             </td>
         </tr>
-        <br>
-        <br> <br>
+        <tr id="hidden_row{{h.0}}1" class="hidden_row" style = "display:none; padding:10px; background-color:#81D4FA; border-color:#4FC3F7">
+          <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="pouchid" value={{h.0}}  >
+            <input type="hidden" name="bookorbookings" value="book"  >
+            <td style = "padding:10px"></td>
+            <td style = "padding:10px"><input type="time" name="dontime" style = "border-radius:5px"></td>
+            <td style = "padding:10px"><input type="date" name="dondate" style = "border-radius:5px"></td>
+            <td style = "padding:10px;text-align:center">
+              <button method="" type="submit" class="btn btn-primary">Book</button>
+            </td>
+          </form>
+        </tr>
         
         {% endfor %}
         {% for h  in mb %}
@@ -212,10 +130,22 @@
             <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.2}}</td>
             <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.3}}</td>
             <td style = "font-family:Comfortaa;font-size:17px;padding:10px;text-align:center">
-              
+              <button class="btn btn-primary" type="button" onclick="showHideRow('hidden_row{{h.0}}1')">
+                booked hai bhai lite le
+            </button>
             </td>
         </tr>
-       <br>
+        <tr id="hidden_row{{h.0}}1" class="hidden_row" style = "display:none; padding:10px; background-color:#81D4FA; border-color:#4FC3F7">
+          <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="hpin" value={{h.0}}  >
+            <input type="hidden" name="bookorbookings" value="book"  >
+            <td style = "padding:10px"></td>
+            <td style = "padding:10px"><input type="time" name="dontime" style = "border-radius:5px"></td>
+            <td style = "padding:10px"><input type="date" name="dondate" style = "border-radius:5px"></td>
+           </td>
+          </form>
+        </tr>
         
         {% endfor %}
     
@@ -242,4 +172,3 @@
     -->
   </body>
 </html>
-

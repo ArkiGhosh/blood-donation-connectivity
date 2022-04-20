@@ -51,11 +51,11 @@ def recipientdashboard(request):
             if key == "pouchid":
                 pouchid = value
         
-        amount="select Volume from pouch where PouchID={}".format(pouchid)
-        cursor.execute(amount)
-        amt=cursor.fetchall()
-        amt = 50000*float(amt[0][0])
-        print(amt)
+        # amount="select Volume from pouch where PouchID={}".format(pouchid)
+        # cursor.execute(amount)
+        # amt=cursor.fetchall()
+        # amt = 50000*float(amt[0][0])
+        # print(amt)
         
         
 
@@ -63,8 +63,11 @@ def recipientdashboard(request):
         dt_string = now.strftime("%Y-%m-%d %H:%M:00")
         now_string=dt_string
         dt_string=dt_string.split()[0]
-        print(now_string,dt_string)
+        print("HELLO")
+        print(now_string)
+        print(dt_string)
         bookp="insert into pouchbooking values('{}',{},'{}','{}')".format(email,pouchid,now_string,dt_string)
+        print(bookp)
         cursor.execute(bookp)
         m.commit()
         bookp="update pouch set IsBooked=1 where PouchId={}".format(pouchid)
