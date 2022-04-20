@@ -125,8 +125,12 @@ def hospitaldashboard(request):
             
         elif deletebooking!='':
             
+            
             BookDate=BookTime
+            print(BookTime)
             BookDate=BookDate.split('T')
+            print(BookDate)
+            print("HEllo")
             BookTime=BookDate[0]+" " + BookDate[1]
             BookDate=BookDate[0]
             delbook="delete pouchbooking from pouchbooking where REmail='{}' and PID={} and RTime='{}' and RDate='{}'".format(Bookemail,BookPID,BookTime,BookDate)
