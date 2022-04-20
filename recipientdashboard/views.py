@@ -1,3 +1,4 @@
+import razorpay
 from django.shortcuts import render, redirect
 import mysql.connector as sql
 from django.contrib import messages
@@ -5,6 +6,8 @@ from datetime import datetime, timedelta
 
 email = ''
 recipp = ''
+pouchid=''
+amt=0
 # Create your views here.
 def authenticate(var):
     response = redirect('/recipientdashboard/')
@@ -22,7 +25,7 @@ def recipientdashboard(request):
     cursor = m.cursor()
     c = "select * from recipient where recipientemail = '{}'".format(email)
     cursor.execute(c)
-    global recipp
+    global recipp,pouchid,amt
     recipp = tuple(cursor.fetchall()) # use for profile
     print(recipp)
 
@@ -40,8 +43,35 @@ def recipientdashboard(request):
     unbookedpouch = tuple(cursor.fetchall())
     print(unbookedpouch)
     #when the pouch is booked we will have to change the isbooked to 1 here in backend
+    if request.method=="POST":
+        cursor = m.cursor()
+        d = request.POST
+        print("--------------------------------------------------")
+        for key,value in d.items():
+            if key == "pouchid":
+                pouchid = value
+        
+        amount="select Volume from pouch where PouchID={}".format(pouchid)
+        cursor.execute(amount)
+        amt=cursor.fetchall()
+        amt = 50000*float(amt[0][0])
+        print(amt)
+        
+        
 
-
+        now=datetime.now()
+        dt_string = now.strftime("%Y-%m-%d %H:%M:00")
+        now_string=dt_string
+        dt_string=dt_string.split()[0]
+        print(now_string,dt_string)
+        bookp="insert into pouchbooking values('{}',{},'{}','{}')".format(email,pouchid,now_string,dt_string)
+        cursor.execute(bookp)
+        m.commit()
+        bookp="update pouch set IsBooked=1 where PouchId={}".format(pouchid)
+        cursor.execute(bookp)
+        m.commit()
+        messages.success(request,"Pouch Booked")
+        return redirect("/recipientdashboard")
 
     #here we have booked slots by the recipient only with all details needed (pouch details + hospital details) associated to the booking show just the essentials ones
     d="select * from pouchbooking inner join pouch inner join hospital on hospital.pin = pouch.hospitalpin on pouch.pouchid=pouchbooking.pid where REmail ='{}'".format(email)
@@ -49,4 +79,4 @@ def recipientdashboard(request):
     bookings = tuple(cursor.fetchall())
     messages.success(request, 'You are signed in as '+email)
 
-    return render(request,'recipientdashboard.html',{'ubp':unbookedpouch,'mb':bookings})
+    return render(request,'recipientdashboard.html',{'ubp':unbookedpouch,'mb':bookings,'amount':amt})

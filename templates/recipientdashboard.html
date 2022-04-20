@@ -188,22 +188,21 @@
             <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.2}}</td>
             <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.3}}</td>
             <td style = "font-family:Comfortaa;font-size:17px;padding:10px;text-align:center">
-              <button class="btn btn-primary" type="button" onclick="showHideRow('hidden_row{{h.0}}1')">
+            <form method="post">
+              {% csrf_token %}
+              <input type="hidden" name="pouchid" value="{{h.0}}">
+              <button class="btn btn-primary" type="submit" id="pay-btn">
+
+
                 Book pouch
-            </button>
+
+                
+              </button>
+            </form>
             </td>
         </tr>
-        <tr id="hidden_row{{h.0}}1" class="hidden_row" style = "display:none; padding:10px; background-color:#81D4FA; border-color:#4FC3F7">
-          <form method="post">
-            {% csrf_token %}
-            <input type="hidden" name="hpin" value={{h.0}}  >
-            <input type="hidden" name="bookorbookings" value="book"  >
-            <td style = "padding:10px"></td>
-            <td style = "padding:10px"><input type="time" name="dontime" style = "border-radius:5px"></td>
-            <td style = "padding:10px"><input type="date" name="dondate" style = "border-radius:5px"></td>
-            <td style = "padding:10px;text-align:center"><button method="" type="submit" class="btn btn-primary">Book</button></td>
-          </form>
-        </tr>
+        <br>
+        <br> <br>
         
         {% endfor %}
         {% for h  in mb %}
@@ -213,16 +212,10 @@
             <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.2}}</td>
             <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.3}}</td>
             <td style = "font-family:Comfortaa;font-size:17px;padding:10px;text-align:center">
-              <button class="btn btn-primary" type="button" onclick="showHideRow('hidden_row{{h.0}}1')">
-                booked hai bhai lite le
-            </button>
+              
             </td>
         </tr>
-        <tr id="hidden_row{{h.0}}1" class="hidden_row" style = "display:none; padding:10px; background-color:#81D4FA; border-color:#4FC3F7">
-            <input type="hidden" name="hpin" value={{h.0}}  >
-            <input type="hidden" name="bookorbookings" value="book"  >
-           
-        </tr>
+       <br>
         
         {% endfor %}
     
@@ -249,3 +242,4 @@
     -->
   </body>
 </html>
+
