@@ -70,7 +70,7 @@ def hospitaldashboard(request):
     c="select * from pouch inner join pouchbooking inner join recipient on recipient.recipientemail = pouchbooking.remail on pouch.PouchID=pouchbooking.PID where pouch.HospitalPIN='{}'".format(hospital_pin)
     cursor.execute(c)
     recbook=tuple(cursor.fetchall())
-
+    print(recbook)
     c = "select * from hospital where PIN = '{}'".format(hospital_pin)
     cursor.execute(c)
     global hospp
@@ -127,8 +127,10 @@ def hospitaldashboard(request):
             
             BookDate=BookTime
             BookDate=BookDate.split('T')
+            print(BookDate)
             BookTime=BookDate[0]+" " + BookDate[1]
             BookDate=BookDate[0]
+            print(BookDate,BookTime)
             delbook="delete pouchbooking from pouchbooking where REmail='{}' and PID={} and RTime='{}' and RDate='{}'".format(Bookemail,BookPID,BookTime,BookDate)
             cursor.execute(delbook)
             print(delbook)
