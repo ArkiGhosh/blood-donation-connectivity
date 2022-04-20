@@ -55,6 +55,7 @@ def hospitaldashboard(request):
             pin = value
             
     print(hospital_pin)
+
     c = "select * from pouch where HospitalPIN = '{}' order by DonationDate".format(hospital_pin)
     cursor.execute(c)
     t = tuple(cursor.fetchall())
@@ -76,7 +77,7 @@ def hospitaldashboard(request):
     global hospp
     hospp = tuple(cursor.fetchall()) # use for profile
     print(hospp)
-
+    authenticate(hospital_pin)
 
     if request.method=="POST":
         cursor = m.cursor()
@@ -139,6 +140,7 @@ def hospitaldashboard(request):
             m.commit()
             messages.success(request,"Booking Processed")
             deletebooking=''
+            authenticate(hospital_pin)
             return redirect('/hospitaldashboard')
 
         else :
@@ -158,6 +160,7 @@ def hospitaldashboard(request):
             c = "insert into pouch values({},'{}',{},{},{},{},{},'{}','{}',{},'{}','{}')".format(pouchid,hospital_pin,Pwt,Pht,Pcs,Page,Pvol,PG,PDD,PiB,PBG,PAdd)
             cursor.execute(c)
             m.commit()
+            authenticate(hospital_pin)
             return redirect("/hospitaldashboard")
 
     return render(request,'hospitaldashboard.html', {'pouches':t,'slots':slots,'recbook':recbook})

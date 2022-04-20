@@ -71,6 +71,7 @@ def recipientdashboard(request):
         cursor.execute(bookp)
         m.commit()
         messages.success(request,"Pouch Booked")
+        authenticate(email)
         return redirect("/recipientdashboard")
 
     #here we have booked slots by the recipient only with all details needed (pouch details + hospital details) associated to the booking show just the essentials ones
@@ -78,5 +79,6 @@ def recipientdashboard(request):
     cursor.execute(d) 
     bookings = tuple(cursor.fetchall())
     messages.success(request, 'You are signed in as '+email)
+    authenticate(email)
 
     return render(request,'recipientdashboard.html',{'ubp':unbookedpouch,'mb':bookings,'amount':amt})

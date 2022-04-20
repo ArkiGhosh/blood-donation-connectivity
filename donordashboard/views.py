@@ -57,6 +57,7 @@ def donordashboard(request):
             cursor.execute(bookingq)
             m.commit()
             messages.success(request,"Slot booked")
+            authenticate(email)
             return redirect('/donordashboard')
 
         else:
@@ -69,12 +70,7 @@ def donordashboard(request):
             cursor.execute(delslot)
             m.commit()
             messages.success(request,"Slot Deleted")
+            authenticate(email)
             return redirect('/donordashboard')
-
-        
-
-        
-        
-
     messages.success(request, 'You are signed in as '+email)
     return render(request,'donordashboard.html',{'hospitals':hospitals,'bookings':bookings})
