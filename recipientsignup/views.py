@@ -1,7 +1,7 @@
 from django.shortcuts import render
 import mysql.connector as sql
 from django.contrib import messages
-
+from twilio.rest import Client
 name = ''
 Pword = ''
 email =''
@@ -29,6 +29,11 @@ def recipientsignup(request):
         c = "insert into recipient Values('{}','{}','{}','{}','{}')".format(name,contact,address,email,Pword)
         cursor.execute(c)
         m.commit()
+        authtoken = "3f634b22f2d9c8024681ebd000d47760"
+        authsid = "ACd6387bcde5a6fe3030c8afb480add54b"
+        client = Client(authsid,authtoken)
+        client.messages.create(to = "+91"+contact,from_ = "+19705174927",body="You have registered succesfully as Donor")
+        
         messages.success(request, 'Registered successfully!')
     
     return render(request,'recipientsignup.html')
