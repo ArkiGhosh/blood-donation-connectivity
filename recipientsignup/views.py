@@ -32,7 +32,7 @@ def recipientsignup(request):
         authtoken = "3f634b22f2d9c8024681ebd000d47760"
         authsid = "ACd6387bcde5a6fe3030c8afb480add54b"
         client = Client(authsid,authtoken)
-        client.messages.create(to = "+91"+contact,from_ = "+19705174927",body="You have registered succesfully as Donor")
+        client.messages.create(to = "+91"+contact,from_ = "+19705174927",body="You have registered succesfully as Recipient")
         
         messages.success(request, 'Registered successfully!')
     
