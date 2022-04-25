@@ -2,7 +2,7 @@ import string
 from django.shortcuts import render, redirect
 import mysql.connector as sql
 from django.contrib import messages
-from hospitaldashboard.views import authenticate
+from hospitaldashboard.views import authenticatehospital
 
 pin = ''
 
@@ -26,7 +26,7 @@ def hospitallogin(request):
         if t == ():
             messages.warning(request, 'Incorrect credentials!')
         else:
-            authenticate(t[0][0])
+            authenticatehospital(t[0][0])
             response = redirect('/hospitaldashboard/')
             return response
 

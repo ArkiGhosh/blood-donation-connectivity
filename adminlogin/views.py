@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 import mysql.connector as sql
 from django.contrib import messages
-from admindash.views import authenticate
+from admindash.views import authenticateadmin
 Uname = ''
 Pword = ''
 # Create your views here.
@@ -23,7 +23,7 @@ def adminlogin(request):
         if t == ():
             messages.warning(request, 'Incorrect credentials!')
         else:
-            authenticate(t[0][0])
+            authenticateadmin(t[0][0])
             return redirect('/admindashboard')
 
     return render(request,'adminlogin.html')

@@ -10,11 +10,13 @@ dontime=''
 dondate=''
 bookorbookings=''
 # Create your views here.
-def authenticate(var):
+def authenticatedonor(var):
     response = redirect('/donordashboard/')
     global email 
     email = var
     # hospitaldashboard()
+    if(var==''):
+        return redirect('/')
     return response
 
 def donorprofile(request):
@@ -23,6 +25,8 @@ def donorprofile(request):
 def donordashboard(request):
     global hPIN,dontime,dondate
     print(email)
+    if(email==''):
+        return redirect("/")
     m = sql.connect(host="localhost",user="root",passwd="P@nky7050",database='dbmsproject')
     cursor = m.cursor()
     c = "select * from hospital"
@@ -57,7 +61,7 @@ def donordashboard(request):
             cursor.execute(bookingq)
             m.commit()
             messages.success(request,"Slot booked")
-            authenticate(email)
+            authenticatedonor(email)
             return redirect('/donordashboard')
 
         else:
@@ -70,7 +74,7 @@ def donordashboard(request):
             cursor.execute(delslot)
             m.commit()
             messages.success(request,"Slot Deleted")
-            authenticate(email)
+            authenticatedonor(email)
             return redirect('/donordashboard')
     messages.success(request, 'You are signed in as '+email)
     return render(request,'donordashboard.html',{'hospitals':hospitals,'bookings':bookings})

@@ -27,11 +27,13 @@ BookTime=''
 BookDate=''
 
 # Create your views here.
-def authenticate(var):
+def authenticatehospital(var):
     response = redirect('/hospitaldashboard/')
     global hospital_pin,delpouch
     hospital_pin = var
     # hospitaldashboard()
+    if(var==''):
+        return redirect('/')
     return response
 
 def hospitalprofile(request):
@@ -39,6 +41,8 @@ def hospitalprofile(request):
 
 def hospitaldashboard(request):
     # print(hospitallogin.views.HOSPITAL_PIN)
+    if(hospital_pin==''):
+        return redirect("/")
     global Uname,Pword,delpouch,Pwt,Pht,Pcs,Page,Pvol,PG,PDD,PiB,PBG,PAdd,BookDate,Bookemail,BookPID,BookTime,deletebooking
     m = sql.connect(host="localhost",user="root",passwd="P@nky7050",database='dbmsproject')
     cursor = m.cursor()
@@ -55,6 +59,7 @@ def hospitaldashboard(request):
             pin = value
             
     print(hospital_pin)
+   
 
     c = "select * from pouch where HospitalPIN = '{}' order by DonationDate".format(hospital_pin)
     cursor.execute(c)
@@ -77,7 +82,7 @@ def hospitaldashboard(request):
     global hospp
     hospp = tuple(cursor.fetchall()) # use for profile
     print(hospp)
-    authenticate(hospital_pin)
+    authenticatehospital(hospital_pin)
 
     if request.method=="POST":
         cursor = m.cursor()
@@ -140,7 +145,7 @@ def hospitaldashboard(request):
             m.commit()
             messages.success(request,"Booking Processed")
             deletebooking=''
-            authenticate(hospital_pin)
+            authenticatehospital(hospital_pin)
             return redirect('/hospitaldashboard')
 
         else :
@@ -160,7 +165,7 @@ def hospitaldashboard(request):
             c = "insert into pouch values({},'{}',{},{},{},{},{},'{}','{}',{},'{}','{}')".format(pouchid,hospital_pin,Pwt,Pht,Pcs,Page,Pvol,PG,PDD,PiB,PBG,PAdd)
             cursor.execute(c)
             m.commit()
-            authenticate(hospital_pin)
+            authenticatehospital(hospital_pin)
             return redirect("/hospitaldashboard")
 
     return render(request,'hospitaldashboard.html', {'pouches':t,'slots':slots,'recbook':recbook})

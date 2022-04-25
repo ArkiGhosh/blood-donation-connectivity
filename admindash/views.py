@@ -9,11 +9,13 @@ hName=''
 hContact=''
 hAddress=''
 username=''
-def authenticate(var):
+def authenticateadmin(var):
     response = redirect('/admindashboard/')
     global username
     username = var
     # hospitaldashboard()
+    if(var==''):
+        return redirect('/')
     return response
 
 def admindashboard(request):
