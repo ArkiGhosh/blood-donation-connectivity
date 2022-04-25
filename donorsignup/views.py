@@ -26,15 +26,20 @@ def donorsignup(request):
                 contact = value
             if key == "address":
                 address = value
-        
-        c = "insert into donor Values('{}','{}','{}','{}','{}')".format(name,contact,address,email,Pword)
+        c = "select donoremail from donor where donoremail ='{}';".format(email)
         cursor.execute(c)
-        m.commit()
-        # authtoken = "3f634b22f2d9c8024681ebd000d47760"
-        # authsid = "ACd6387bcde5a6fe3030c8afb480add54b"
-        # client = Client(authsid,authtoken)
-        # client.messages.create(to = "+91"+contact,from_ = "+19705174927",body="You have registered succesfully as Donor")
-        
-        messages.success(request, 'Registered successfully!')
+        verifyduplicate = tuple(cursor.fetchall())
+        if verifyduplicate==():
+            c = "insert into donor Values('{}','{}','{}','{}','{}')".format(name,contact,address,email,Pword)
+            cursor.execute(c)
+            m.commit()
+            # authtoken = "3f634b22f2d9c8024681ebd000d47760"
+            # authsid = "ACd6387bcde5a6fe3030c8afb480add54b"
+            # client = Client(authsid,authtoken)
+            # client.messages.create(to = "+91"+contact,from_ = "+19705174927",body="You have registered succesfully as Donor")
+            
+            messages.success(request, 'Registered successfully!')
+        else:
+            messages.warning(request,"Already registered with the same email ID")
     
     return render(request,'donorsignup.html')

@@ -1,4 +1,5 @@
 from email import message
+from re import U
 from django.shortcuts import render
 import mysql.connector as sql
 from django.contrib import messages
@@ -16,11 +17,15 @@ def adminsignup(request):
                 Uname = value
             if key == "password":
                 Pword = value
-        
-        c = "insert into admin Values('{}','{}')".format(Uname,Pword)
-        messages.success(request, 'New Admin Added!')
-        
+        c = "select username from admin where username = '{}'".format(Uname)
         cursor.execute(c)
-        m.commit()
+        verify = tuple(cursor.fetchall())
+        if verify == ():
+            c = "insert into admin Values('{}','{}')".format(Uname,Pword)
+            messages.success(request, 'New Admin Added!')
+            cursor.execute(c)
+            m.commit()
+        else:
+            messages.warning(request,"Already used this username")
     
     return render(request,'adminsignup.html')
