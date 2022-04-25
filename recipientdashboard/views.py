@@ -9,11 +9,14 @@ recipp = ''
 pouchid=''
 amt=0
 # Create your views here.
-def authenticate(var):
+def authenticaterecipient(var):
     response = redirect('/recipientdashboard/')
     global email 
     email = var
     # hospitaldashboard()
+    if(var==''):
+        return redirect('/')
+    
     return response
 
 def recipientprofile(request):
@@ -21,6 +24,9 @@ def recipientprofile(request):
 
 def recipientdashboard(request):
     print(email)
+    if(email==''):
+        return redirect("/")
+
     m = sql.connect(host="localhost",user="root",passwd="P@nky7050",database='dbmsproject')
     cursor = m.cursor()
     c = "select * from recipient where recipientemail = '{}'".format(email)
@@ -74,7 +80,7 @@ def recipientdashboard(request):
         cursor.execute(bookp)
         m.commit()
         messages.success(request,"Pouch Booked")
-        authenticate(email)
+        authenticaterecipient(email)
         return redirect("/recipientdashboard")
 
     #here we have booked slots by the recipient only with all details needed (pouch details + hospital details) associated to the booking show just the essentials ones
@@ -82,6 +88,6 @@ def recipientdashboard(request):
     cursor.execute(d) 
     bookings = tuple(cursor.fetchall())
     messages.success(request, 'You are signed in as '+email)
-    authenticate(email)
+    authenticaterecipient(email)
 
     return render(request,'recipientdashboard.html',{'ubp':unbookedpouch,'mb':bookings,'amount':amt})
