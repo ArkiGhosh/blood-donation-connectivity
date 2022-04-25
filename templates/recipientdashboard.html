@@ -38,8 +38,51 @@
               });
           });
       });
+      $(document).ready(function() {
+        $("#searchb").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#pouchb tr").filter(function() {
+                $(this).toggle($(this).text()
+                .toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+    function change1(){
+      let e = document.querySelector('.second');
+      let e1 = document.querySelector('.second1');
+      if (e.classList.contains('first')){
+        e.classList.remove('first');
+      }
+      else{
+        e.classList.add('first');
+      }
+      if (e1.classList.contains('first1')){
+        e1.classList.add('first1');
+      }
+      
+
+    }
+    function change2(){
+      let e = document.querySelector('.second1');
+      let e1 = document.querySelector('.second');
+      if (e.classList.contains('first1')){
+        e.classList.remove('first1');
+      }
+      else{
+        e.classList.add('first1');
+      }
+      if (e1.classList.contains('first')){
+        e1.classList.add('first');
+      }
+    }
   </script>
     <style>
+      .first{
+        display:none;
+      }
+      .first1{
+        display:none;
+      }
       .heading{
         text-align: center;
         font-family: Comfortaa;
@@ -200,14 +243,14 @@
    
     </div>
 
-<div class = "first1 my-5 second1" style="border-radius:5px !important;"> 
+<div class = "first my-5 second" style="border-radius:5px !important;"> 
   
       <h4 style="text-align:center; font-family:Comfortaa; padding:5px">
         <b>
             View pouches
         </b>
       </h4>
-  <div style = "overflow:auto; height:400px;">
+  <div style = "overflow:auto; height:300px;">
     <table style="border-radius:10px !important;overflow:hidden; border-collapse:collapse; width:80%; margin:auto; font-family:Comfortaa;">
       <thead class="thead-dark">
         <tr style = "background-color:#01579B;color:white" >
@@ -271,14 +314,14 @@
         Your bookings
     </b>
   </h4>
-<div style = "overflow:auto; height:400px;">
+<div style = "overflow:auto; height:200px;">
 <table style="border-radius:10px !important;overflow:hidden; border-collapse:collapse; width:80%; margin:auto; font-family:Comfortaa;">
   <thead class="thead-dark">
     <tr style = "background-color:#01579B;color:white" >
         <th scope="col"  style="padding:10px;font-size:17px;">Pouch ID</th>
         <th scope="col"  style="padding:10px;font-size:17px">Hospital Name</th>
-        <th scope="col"  style="padding:10px;font-size:;">Date and Time</th>
-        <th scope="col"  style="padding:10px;font-size:;text-align:center;"><input id="searchb" class="form-control" type="text" 
+        <th scope="col"  style="padding:10px;font-size:;">Hospital Contact</th>
+        <th scope="col"  style="padding:10px;font-size:;text-align:center;" colspan = "2"><input id="searchb" class="form-control" type="text" 
           placeholder="Search here"></th>
     </tr>
   </thead>
@@ -287,19 +330,21 @@
         <tr style="background-color:#4FC3F7;color:black; border-color:#4FC3F7">
           <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.1}}</td>
           <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.17}}</td>
+          <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.18}}</td>
+          <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.14}}</td>
           <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.2}}</td>
-          <td style = "font-family:Comfortaa;font-size:17px;padding:10px;text-align:center">
+          {% comment %} <td style = "font-family:Comfortaa;font-size:17px;padding:10px;text-align:center">
             <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" onclick="showHideRow1('hidden_row{{h.0}}3')">
                 <b><i class="fa fa-angle-down" aria-hidden="true" style = "color: :#01579B"></i></b>
             </button>
-          </td>
+          </td> {% endcomment %}
         </tr>
-        <tr id="hidden_row{{h.0}}3" class="hidden_row" style = "display:none; padding:10px; background-color:#4FC3F7">
+        {% comment %} <tr id="hidden_row{{h.0}}3" class="hidden_row" style = "display:none; padding:10px; background-color:#4FC3F7">
           <td style = "padding:10px">Blood Group: {{h.14}}</td>
           <td style = "padding:10px">Additional Details: {{h.15}}</td>
           <td style = "padding:10px">Contact: {{h.18}}</td>
           <td style="padding:10px;font-size:;">Address: {{h.19}}</td>
-        </tr>
+        </tr> {% endcomment %}
         {% endfor %}
   </tbody>
 </table>
