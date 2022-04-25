@@ -27,3 +27,5 @@ def adminlogin(request):
             return redirect('/admindashboard')
 
     return render(request,'adminlogin.html')
+
+#test comment
