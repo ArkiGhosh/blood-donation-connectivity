@@ -79,6 +79,58 @@
               .first3{
                 display:none;
               }
+              .cloud{
+                height:100px;
+                width:125px;
+                opacity: 0.7;
+                position: relative;
+                transform: translateX(-100%);
+                
+              }
+              .cloud1{
+                animation: float 12s linear infinite;
+              }
+              .cloud2{
+                animation: float 12s linear 3s infinite;
+              }
+              .cloud3{
+                animation: float 12s linear 6s infinite;
+                zoom:0.5;
+              }
+              .rec{
+                width: 140px;
+                height: 50px;
+                background: #fff;
+                border-radius: 50px;
+                position: absolute;
+                bottom: 0;
+              }
+              @keyframes float{
+                0%{
+                  transform: translateX(-100%);
+                }
+                100%{
+                  transform: translateX(100vw);
+                }
+              }
+              .vrec1{
+                width: 50px;
+                height: 85px;
+                background: #fff;
+                position:absolute;
+                bottom: 0;
+                border-radius: 50px;
+                right: 10px;
+              }
+              .vrec2{
+                width: 50px;
+                height: 75px;
+                background: #fff;
+                position:absolute;
+                bottom: 0;
+                border-radius: 100px;
+                right: 50px;
+              }
     </style>
     <script>
         function change1(){
@@ -222,6 +274,17 @@
         {% endfor %}
     {% endif %}
 
+    <div class = "cloud cloud1">
+        <div class = "rec"></div>
+        <div class = "vrec1"></div>
+        <div class = "vrec2"></div>
+      </div>
+  
+      <div class = "cloud cloud3">
+        <div class = "rec"></div>
+        <div class = "vrec1"></div>
+        <div class = "vrec2"></div>
+      </div>
     
 <div class="heading">
     <h2>
@@ -456,7 +519,11 @@
 {% endblock body%}
 
 
-
+<div class = "cloud cloud2">
+    <div class = "rec"></div>
+    <div class = "vrec1"></div>
+    <div class = "vrec2"></div>
+  </div>
 
 <div class="siteFooterBar py-2" style = "text-align: center">
   <div style = "font-family:Comfortaa"><h5><b>A project by</b></h6></div>
