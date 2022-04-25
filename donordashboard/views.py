@@ -78,3 +78,4 @@ def donordashboard(request):
             return redirect('/donordashboard')
     messages.success(request, 'You are signed in as '+email)
     return render(request,'donordashboard.html',{'hospitals':hospitals,'bookings':bookings})
+  #fix

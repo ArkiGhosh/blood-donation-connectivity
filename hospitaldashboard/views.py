@@ -169,3 +169,4 @@ def hospitaldashboard(request):
             return redirect("/hospitaldashboard")
 
     return render(request,'hospitaldashboard.html', {'pouches':t,'slots':slots,'recbook':recbook})
+      #fix

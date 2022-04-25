@@ -31,3 +31,4 @@ def hospitallogin(request):
             return response
 
     return render(request,'hospitallogin.html')
+      #fix
