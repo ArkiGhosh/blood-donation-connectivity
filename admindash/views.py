@@ -29,6 +29,27 @@ def admindashboard(request):
     cursor.execute(c)
     adminprofile = tuple(cursor.fetchall()) # use for profile
     print(adminprofile)
+    c = "select count(*),Hospitalname from pouch inner join hospital on hospital.PIN = pouch.HospitalPin group by hospitalname;"
+    cursor.execute(c)
+    hospital_pouch_count = tuple(cursor.fetchall())
+    print("count of pouches , hospital name")
+    print(hospital_pouch_count)
+    c = "select count(*),Hospitalname from donationslot inner join hospital on hospital.PIN = donationslot.HPin group by hospitalname;"
+    cursor.execute(c)
+    hospital_slot_count = tuple(cursor.fetchall())
+    print("count of slots , hospital name")
+    print(hospital_slot_count)
+    c = "select count(*) from pouchbooking;"
+    cursor.execute(c)
+    pouchbooking_count = tuple(cursor.fetchall())
+    print("count of total active pouchbookings")
+    print(pouchbooking_count)
+    c = "select count(*),hospitalname from pouchbooking inner join pouch on pouch.pouchid=pouchbooking.pid inner join hospital on hospital.PIN = pouch.hospitalPIN group by hospitalname;"
+    cursor.execute(c)
+    hospital_booking_count = tuple(cursor.fetchall())
+    print("count of total hospitalwise pouchbookings")
+    print(hospital_booking_count)
+
     if request.method=="POST":
         cursor = m.cursor()
         d = request.POST
