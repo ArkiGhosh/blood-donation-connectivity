@@ -7,9 +7,44 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
+    <script src=
+    "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+        </script>
+        <script src=
+    "https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js">
+        </script>
     <title></title>
+    <script>
+      function showHideRow(row1, row2) {
+        $("#" + row1).toggle();
+        $("#" + row2).toggle();
+    }
+  </script>
+  <script>
+    function showHideRow1(row1) {
+      $("#" + row1).toggle();
+  }
+</script>
+  <script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+    </script>
+    <script>
+      $(document).ready(function() {
+          $("#search").on("keyup", function() {
+              var value = $(this).val().toLowerCase();
+              $("#pouch tr").filter(function() {
+                  $(this).toggle($(this).text()
+                  .toLowerCase().indexOf(value) > -1)
+              });
+          });
+      });
+  </script>
     <style>
+      .heading{
+        text-align: center;
+        font-family: Comfortaa;
+        margin-top:40px;
+    }
         .scroll {
             border: none;
             padding: 5px;
@@ -99,55 +134,112 @@
     </button>
    
     </div>
-    {% for h  in ubp %}
-        {{h}}
-        <tr style="background-color:#01579B;color:white; border-color:#4FC3F7">
-            <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.1}}</td>
-            <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.2}}</td>
-            <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.3}}</td>
-            <td style = "font-family:Comfortaa;font-size:17px;padding:10px;text-align:center">
-            </td>
+
+<div class = "first1 my-5 second1" style="border-radius:5px !important;"> 
+  
+      <h4 style="text-align:center; font-family:Comfortaa; padding:5px">
+        <b>
+            View pouches
+        </b>
+      </h4>
+  <div style = "overflow:auto; height:400px;">
+    <table style="border-radius:10px !important;overflow:hidden; border-collapse:collapse; width:80%; margin:auto; font-family:Comfortaa;">
+      <thead class="thead-dark">
+        <tr style = "background-color:#01579B;color:white" >
+            <th scope="col"  style="padding:10px;font-size:17px;">Blood Group</th>
+            <th scope="col"  style="padding:10px;font-size:17px">Volume</th>
+            <th scope="col"  style="padding:10px;font-size:17px">Hospital Name</th>
+            <th scope="col"  style="padding:10px;font-size:17px">Date of Donation</th>
+            <th scope="col"  style="padding:10px;font-size:;"></th>
+            <th scope="col"  style="padding:10px;font-size:;text-align:center;"><input id="search" class="form-control" type="text" 
+              placeholder="Search here"></th>
         </tr>
-        <tr id="hidden_row{{h.0}}1" class="hidden_row" style = "display:none; padding:10px; background-color:#81D4FA; border-color:#4FC3F7">
-          <form method="post">
-            {% csrf_token %}
-            <input type="hidden" name="pouchid" value={{h.0}}  >
-            <input type="hidden" name="bookorbookings" value="book"  >
-            <td style = "padding:10px"></td>
-            <td style = "padding:10px"><input type="time" name="dontime" style = "border-radius:5px"></td>
-            <td style = "padding:10px"><input type="date" name="dondate" style = "border-radius:5px"></td>
-            <td style = "padding:10px;text-align:center">
-              <button method="" type="submit" class="btn btn-primary">Book</button>
-            </td>
-          </form>
-        </tr>
-        
-        {% endfor %}
-        {% for h  in mb %}
-        {{h}}
-        <tr style="background-color:#01579B;color:white; border-color:#4FC3F7">
-            <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.1}}</td>
-            <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.2}}</td>
-            <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.3}}</td>
-            <td style = "font-family:Comfortaa;font-size:17px;padding:10px;text-align:center">
-              <button class="btn btn-primary" type="button" onclick="showHideRow('hidden_row{{h.0}}1')">
-                booked hai bhai lite le
+      </thead>
+      <tbody id = "pouch">
+        {% for h  in ubp %}
+            <tr style="background-color:#01579B;color:white; border-color:#4FC3F7">
+              <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.10}}</td>
+              <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.6}}ml</td>
+              <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.13}}</td>
+              <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.8}}</td>
+              <td style = "font-family:Comfortaa;font-size:17px;padding:10px">
+                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" onclick="showHideRow('hidden_row{{h.0}}1','hidden_row{{h.0}}2')">
+                    <b><i class="fa fa-angle-down" aria-hidden="true" style = "color: #4FC3F7"></i></b>
+                </button>
+              </td>
+              <td style = "font-family:Comfortaa;font-size:17px;padding:10px;text-align:center;">
+              <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="pouchid" value={{h.0}}  >
+                <input type="hidden" name="bookorbookings" value="book"  >
+                  <button method="" type="submit" class="btn btn-primary">Book</button>
+                </td>
+              </form>
+            </tr>
+            <tr id="hidden_row{{h.0}}1" class="hidden_row" style = "display:none; padding:10px; background-color:#4FC3F7">
+              <td style = "padding:10px">Weight: {{h.2}}kg</td>
+              <td style = "padding:10px">Height: {{h.3}}cm</td>
+              <td style = "padding:10px">Covid Status: {{h.4}}</td>
+              <td style = "padding:10px">Age: {{h.5}}</td>
+              <td style="padding:10px;font-size:;"></td>
+              <td style="padding:10px;font-size:;"></td>
+            </tr>
+            <tr id="hidden_row{{h.0}}2" class="hidden_row" style = "display:none; padding:10px; background-color:#4FC3F7">
+                <td style = "padding:10px">Gender: {{h.7}}</td>
+                <td style = "padding:10px">Additional Data: {{h.11}}</td>
+                <td style = "padding:10px">Contact: {{h.14}}</td>
+                <td style = "padding:10px">Additional Data: {{h.15}}</td>
+                <td style="padding:10px;font-size:;"></td>
+                <td style="padding:10px;font-size:;"></td>
+            </tr>
+            
+            {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class = "first1 my-5 second1" style="border-radius:5px !important;"> 
+  
+  <h4 style="text-align:center; font-family:Comfortaa; padding:5px">
+    <b>
+        Your bookings
+    </b>
+  </h4>
+<div style = "overflow:auto; height:400px;">
+<table style="border-radius:10px !important;overflow:hidden; border-collapse:collapse; width:80%; margin:auto; font-family:Comfortaa;">
+  <thead class="thead-dark">
+    <tr style = "background-color:#01579B;color:white" >
+        <th scope="col"  style="padding:10px;font-size:17px;">Pouch ID</th>
+        <th scope="col"  style="padding:10px;font-size:17px">Hospital Name</th>
+        <th scope="col"  style="padding:10px;font-size:;">Date and Time</th>
+        <th scope="col"  style="padding:10px;font-size:;text-align:center;"><input id="searchb" class="form-control" type="text" 
+          placeholder="Search here"></th>
+    </tr>
+  </thead>
+  <tbody id = "pouchb">
+    {% for h  in mb %}
+        <tr style="background-color:#4FC3F7;color:black; border-color:#4FC3F7">
+          <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.1}}</td>
+          <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.17}}</td>
+          <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{h.2}}</td>
+          <td style = "font-family:Comfortaa;font-size:17px;padding:10px;text-align:center">
+            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" onclick="showHideRow1('hidden_row{{h.0}}3')">
+                <b><i class="fa fa-angle-down" aria-hidden="true" style = "color: :#01579B"></i></b>
             </button>
-            </td>
+          </td>
         </tr>
-        <tr id="hidden_row{{h.0}}1" class="hidden_row" style = "display:none; padding:10px; background-color:#81D4FA; border-color:#4FC3F7">
-          <form method="post">
-            {% csrf_token %}
-            <input type="hidden" name="hpin" value={{h.0}}  >
-            <input type="hidden" name="bookorbookings" value="book"  >
-            <td style = "padding:10px"></td>
-            <td style = "padding:10px"><input type="time" name="dontime" style = "border-radius:5px"></td>
-            <td style = "padding:10px"><input type="date" name="dondate" style = "border-radius:5px"></td>
-           </td>
-          </form>
+        <tr id="hidden_row{{h.0}}3" class="hidden_row" style = "display:none; padding:10px; background-color:#4FC3F7">
+          <td style = "padding:10px">Blood Group: {{h.14}}</td>
+          <td style = "padding:10px">Additional Details: {{h.15}}</td>
+          <td style = "padding:10px">Contact: {{h.18}}</td>
+          <td style="padding:10px;font-size:;">Address: {{h.19}}</td>
         </tr>
-        
         {% endfor %}
+  </tbody>
+</table>
+</div>
+</div>
     
 
 
