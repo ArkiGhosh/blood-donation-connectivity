@@ -357,7 +357,7 @@
             <td></td>
             <td></td>
             <td style = "padding:5px">
-                <form method="post">
+                <form method="post" onsubmit="return confirm('Are you sure you want to delete');">
                     {% csrf_token %}
                 <input type="hidden" name="delpouch" value="{{h.0}}">
                 <button class="btn btn-primary" type="submit">Delete</button>
@@ -376,7 +376,7 @@
 <div class = "pouchadd container-fluid form-group" style="font-family:Comfortaa;">
     <h4 class = "my-3" style="text-align:center">Add Pouch</h4>
     <table style="border-radius:10px !important;overflow:hidden; border-collapse:collapse; width:100%; margin:auto; font-family:Comfortaa;">
-        <form method="post">
+        <form method="post" onsubmit="return confirm('Have you verified all information of the pouch');"> 
             {% csrf_token %}
         <tbody>
             <tr>
@@ -463,7 +463,7 @@
             <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{book.18}}</td>
             <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{book.0}}</td>
             <td style = "padding:5px">
-                <form method="post">
+                <form method="post" onsubmit="return confirm('Affirm Pouch delivery');">
                     {%csrf_token%}
                     <input type="hidden" name="Bookemail" value="{{book.12}}">
                     <input type="hidden" name="BookPID" value="{{book.0}}">

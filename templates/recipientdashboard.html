@@ -75,6 +75,19 @@
         e1.classList.add('first');
       }
     }
+    function validate(form) {
+
+      // validation code here ...
+  
+  
+      if(!valid) {
+          alert('Please correct the errors in the form!');
+          return false;
+      }
+      else {
+          return confirm('Do you really want to submit the form?');
+      }
+  }
   </script>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');
@@ -277,7 +290,7 @@
                 </button>
               </td>
               <td style = "font-family:Comfortaa;font-size:17px;padding:10px;text-align:center;">
-              <form method="post">
+              <form method="post" onsubmit="return confirm('Have you verified all information of the pouch as bookings once made cannot be cancelled');">
                 {% csrf_token %}
                 <input type="hidden" name="pouchid" value={{h.0}}  >
                 <input type="hidden" name="bookorbookings" value="book"  >
@@ -297,7 +310,7 @@
                 <td style = "padding:10px">Gender: {{h.7}}</td>
                 <td style = "padding:10px">Additional Data: {{h.11}}</td>
                 <td style = "padding:10px">Contact: {{h.14}}</td>
-                <td style = "padding:10px">Additional Data: {{h.15}}</td>
+                <td style = "padding:10px">Address: {{h.15}}</td>
                 <td style="padding:10px;font-size:;"></td>
                 <td style="padding:10px;font-size:;"></td>
             </tr>

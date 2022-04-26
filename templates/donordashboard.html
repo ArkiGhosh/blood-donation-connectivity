@@ -250,7 +250,7 @@
             </td>
         </tr>
         <tr id="hidden_row{{h.0}}1" class="hidden_row" style = "display:none; padding:10px; background-color:#81D4FA; border-color:#4FC3F7">
-          <form method="post">
+          <form method="post" onsubmit="return confirm('Confirm Slot booking');">
             {% csrf_token %}
             <input type="hidden" name="hpin" value={{h.0}}  >
             <input type="hidden" name="bookorbookings" value="book"  >
@@ -296,7 +296,7 @@
                   <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{b.6}}</td>
                   <td style = "font-family:Comfortaa;font-size:17px;padding:10px">{{b.7}}</td>
                   <td style = "font-family:Comfortaa;font-size:17px;padding:10px;text-align:center;">
-                    <form method="post">
+                    <form method="post" onsubmit="return confirm('Confirm deletion');">
                       {% csrf_token %}
                       <input type="hidden" name="hpin" value={{b.0}}  >
                       <input type="hidden" name="dontime" value={{b.2.isoformat}}>
