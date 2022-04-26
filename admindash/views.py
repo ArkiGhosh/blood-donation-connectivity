@@ -21,7 +21,7 @@ def authenticateadmin(var):
 
 def admindashboard(request):
     global hdel,option,hName,hContact,hAddress
-    m = sql.connect(host="localhost",user="root",passwd="P@nky7050",database='dbmsproject')
+    m = sql.connect(host="localhost",user="root",passwd="Paranitrophenol@10",database='dbms_project')
 
     cursor = m.cursor()
     c = "select * from hospital"
@@ -35,25 +35,43 @@ def admindashboard(request):
     print(adminprofile)
     c = "select count(*),Hospitalname from pouch inner join hospital on hospital.PIN = pouch.HospitalPin group by PIN;"
     cursor.execute(c)
-    hospital_pouch_count = tuple(cursor.fetchall())
+    hospital_pouch_count = cursor.fetchall()
+    hospital_pouch_count1=[]
+    for x in hospital_pouch_count:
+        hospital_pouch_count1.append(x[0])
+
     print("count of pouches , hospital name")
     print(hospital_pouch_count)
     c = "select count(*),Hospitalname from donationslot inner join hospital on hospital.PIN = donationslot.HPin group by PIN;"
     cursor.execute(c)
-    hospital_slot_count = tuple(cursor.fetchall())
+    hospital_slot_count = cursor.fetchall()
+    hospital_slot_count1 = []
+    for x in hospital_slot_count:
+        hospital_slot_count1.append(x[0])
     print("count of slots , hospital name")
     print(hospital_slot_count)
     c = "select count(*) from pouchbooking;"
     cursor.execute(c)
-    pouchbooking_count = tuple(cursor.fetchall())
+    pouchbooking_count = cursor.fetchall()
+    pouchbooking_count = pouchbooking_count[0]
     print("count of total active pouchbookings")
     print(pouchbooking_count)
     c = "select count(*),hospitalname from pouchbooking inner join pouch on pouch.pouchid=pouchbooking.pid inner join hospital on hospital.PIN = pouch.hospitalPIN group by hospitalname;"
     cursor.execute(c)
-    hospital_booking_count = tuple(cursor.fetchall())
+    hospital_booking_count = cursor.fetchall()
+    hospital_booking_count1 = []
+    for x in hospital_booking_count:
+        hospital_booking_count1.append(x[0])
     print("count of total hospitalwise pouchbookings")
     print(hospital_booking_count)
-    stats={'hospital_pouch_count':hospital_pouch_count,'pouchbooking_count':pouchbooking_count,'hospital_slot_count':hospital_slot_count,'hospital_booking_count':hospital_booking_count}
+    c="select count(*),BloodGroup from pouch group by BloodGroup"
+    cursor.execute(c)
+    BG=cursor.fetchall()
+    BG1 = []
+    for x in BG:
+        BG1.append(x[0])
+
+    stats={'hospital_pouch_count':hospital_pouch_count,'hospital_pouch_count1':hospital_pouch_count1,'pouchbooking_count':pouchbooking_count,'hospital_slot_count':hospital_slot_count,'hospital_slot_count1':hospital_slot_count1,'hospital_booking_count':hospital_booking_count,'hospital_booking_count1':hospital_booking_count1,'BG':BG, 'BG1':BG1}
 
     if request.method=="POST":
         cursor = m.cursor()
