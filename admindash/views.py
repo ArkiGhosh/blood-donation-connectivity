@@ -1,3 +1,4 @@
+from os import stat
 from django.shortcuts import render,redirect
 import mysql.connector as sql
 from django.contrib import messages
@@ -20,7 +21,8 @@ def authenticateadmin(var):
 
 def admindashboard(request):
     global hdel,option,hName,hContact,hAddress
-    m = sql.connect(host="localhost",user="root",passwd="P@nky7050",database='DBMSproject')
+    m = sql.connect(host="localhost",user="root",passwd="P@nky7050",database='dbmsproject')
+
     cursor = m.cursor()
     c = "select * from hospital"
     cursor.execute(c)
@@ -51,6 +53,7 @@ def admindashboard(request):
     hospital_booking_count = tuple(cursor.fetchall())
     print("count of total hospitalwise pouchbookings")
     print(hospital_booking_count)
+    stats={'hospital_pouch_count':hospital_pouch_count,'pouchbooking_count':pouchbooking_count,'hospital_slot_count':hospital_slot_count,'hospital_booking_count':hospital_booking_count}
 
     if request.method=="POST":
         cursor = m.cursor()
@@ -103,4 +106,4 @@ def admindashboard(request):
                 authenticateadmin(username)
                 return redirect('/admindashboard') 
         
-    return render(request,'admindashboard.html',{"all":t})
+    return render(request,'admindashboard.html',{"all":t,"stats":stats})
