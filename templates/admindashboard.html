@@ -7,12 +7,18 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js">
+    </script>
     <title>{% block title %}{% endblock title %}</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');
         td{
             text-align:center;
+        }
+        .heading{
+            text-align: center;
+            font-family: Comfortaa;
+            margin-top:40px;
         }
         .scroll {
             border: none;
@@ -89,6 +95,12 @@
                 border-radius: 100px;
                 right: 50px;
               }
+              .container{
+                  width: 600px
+              }
+              .container1{
+                width: 400px
+            }
     </style>
     <script src=
 "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js">
@@ -130,13 +142,13 @@
                 <a class="nav-link active" aria-current="page" href="/"><i class="fa fa-home" aria-hidden="true"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/contact" style = "font-family:Comfortaa">Contact</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link active" href="/about" style = "font-family:Comfortaa">About Us</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="/services" style = "font-family:Comfortaa">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="https://github.com/ArkiGhosh/Blood-Donation-Connectivity" style = "font-family:Comfortaa"><i class="fa fa-github fa" aria-hidden="true"></i></a>
                 </li>
             </ul>
             <div class = "nav-item dropdown">
@@ -171,7 +183,15 @@
       </div>
 
 {% block body%}
-<div class = "my-5" style="border-radius:5px !important;"> 
+
+<div class="heading">
+    <h2>
+       
+        All hospitals: 
+        
+    </h2>
+</div>
+<div class = "my-5" style="border-radius:5px !important;overflow:auto;height:350px;"> 
 <table style="border-radius:10px !important;overflow:hidden; border-collapse:collapse; width:80%; margin:auto; font-family:Comfortaa;">
     <tbody>
         {% for h  in all %}
@@ -230,38 +250,173 @@
 </table>
 </div>
 
-
-
-
-<div>
-    {%for hpc in stats.hospital_pouch_count%}
-    <div>{{hpc}}</div>
-    <br>
-    {%endfor %}
+<div class = "row">
+<div class = "container">
+    <div class="heading">
+        <h3>
+           
+            Hospital wise pouch count
+            
+        </h3>
+    </div>
+    <canvas id ="Chart1"></canvas>
 </div>
-<div>-------------------------------------------------------</div>
-<div>
-    {%for pbc in stats.pouchbooking_count%}
-    <div>{{pbc}}</div>
-    <br>
-    {%endfor %}
-</div>
-<div>-------------------------------------------------------</div>
 
-<div>
-    {%for hsc in stats.hospital_slot_count%}
-    <div>{{hsc}}</div>
-    <br>
-    {%endfor %}
-</div>
-<div>-------------------------------------------------------</div>
+<script>
+    let myChart = document.getElementById('Chart1').getContext('2d');
+    var stats = {{stats.hospital_pouch_count|safe}};
+    var stats1 = {{stats.hospital_pouch_count1}};
+    const label1 = [];
+    const data1 = [];
+    for(let i = 0; i < stats.length; i++){
+        label1.push(stats[i]);
+        data1.push(stats1[i]);
+    }
+    let hpc = new Chart(myChart, {
+        type: 'bar',
+        data: {
+            labels: label1,
+            datasets: [{
+                label: 'Pouch Count',
+                data: data1,
+                backgroundColor:'#F48FB1'
+            }]
+        },
+        options: {
+            
+        }
+    });
+</script>
 
-<div>
-    {%for hbc in stats.hospital_booking_count%}
-    <div>{{hbc}}</div>
-    <br>
-    {%endfor %}
+<div class = "container">
+    <div class="heading">
+        <h3>
+           
+            Hospital wise donations
+            
+        </h3>
+    </div>
+    <canvas id ="Chart2"></canvas>
 </div>
+
+<script>
+    let myChart2 = document.getElementById('Chart2').getContext('2d');
+    var stats = {{stats.hospital_slot_count|safe}};
+    console.log(stats);
+    var stats1 = {{stats.hospital_slot_count1}};
+    const label2 = [];
+    const data2 = [];
+    for(let i = 0; i < stats.length; i++){
+        label2.push(stats[i]);
+        data2.push(stats1[i]);
+    }
+    let dsc = new Chart(myChart2, {
+        type: 'bar',
+        data: {
+            labels: label2,
+            datasets: [{
+                label: 'Donation Count',
+                data: data2,
+                backgroundColor:'#CE93D8'
+            }]
+        },
+        options: {
+            
+        }
+    });
+</script>
+</div>
+
+
+<div class="heading">
+    <h3>
+       
+        Total number of active pouch bookings: {{stats.pouchbooking_count.0}}
+        
+    </h3>
+</div>
+
+<div class = "row">
+<div class = "container">
+    <div class="heading">
+        <h3>
+           
+            Hospital wise pouch bookings
+            
+        </h3>
+    </div>
+    <canvas id ="Chart3"></canvas>
+</div>
+
+<script>
+    let myChart3 = document.getElementById('Chart3').getContext('2d');
+    var stats = {{stats.hospital_booking_count|safe}};
+    console.log(stats);
+    var stats1 = {{stats.hospital_booking_count1}};
+    const label3 = [];
+    const data3 = [];
+    for(let i = 0; i < stats.length; i++){
+        label3.push(stats[i]);
+        data3.push(stats1[i]);
+    }
+    let dsc1 = new Chart(myChart3, {
+        type: 'bar',
+        data: {
+            labels: label3,
+            datasets: [{
+                label: 'Donation Count',
+                data: data3,
+                backgroundColor:'#EF9A9A'
+            }]
+        },
+        options: {
+            
+        }
+    });
+</script>
+
+<div class = "container1" style = "margin-right:100px">
+    <div class="heading">
+        <h3>
+           
+            Blood Group count
+            
+        </h3>
+    </div>
+    <canvas id ="Chart4"></canvas>
+</div>
+
+<script>
+    let myChart4 = document.getElementById('Chart4').getContext('2d');
+    var stats = {{stats.BG|safe}};
+    console.log(stats);
+    var stats1 = {{stats.BG1}};
+    const label4 = [];
+    const data4 = [];
+    for(let i = 0; i < stats.length; i++){
+        label4.push(stats[i]);
+        data4.push(stats1[i]);
+    }
+    let dsc2 = new Chart(myChart4, {
+        type: 'radar',
+        data: {
+            labels: label4,
+            datasets: [{
+                label: 'Blood Group Count',
+                data: data4,
+                backgroundColor:'#00C853',
+                borderColor:"#2E7D32",
+                borderWidth:2
+            }]
+        },
+        options: {
+            
+        }
+    });
+</script>
+</div>
+
+
 
 {% endblock body%}
 
