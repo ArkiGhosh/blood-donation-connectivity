@@ -230,6 +230,39 @@
 </table>
 </div>
 
+
+
+
+<div>
+    {%for hpc in stats.hospital_pouch_count%}
+    <div>{{hpc}}</div>
+    <br>
+    {%endfor %}
+</div>
+<div>-------------------------------------------------------</div>
+<div>
+    {%for pbc in stats.pouchbooking_count%}
+    <div>{{pbc}}</div>
+    <br>
+    {%endfor %}
+</div>
+<div>-------------------------------------------------------</div>
+
+<div>
+    {%for hsc in stats.hospital_slot_count%}
+    <div>{{hsc}}</div>
+    <br>
+    {%endfor %}
+</div>
+<div>-------------------------------------------------------</div>
+
+<div>
+    {%for hbc in stats.hospital_booking_count%}
+    <div>{{hbc}}</div>
+    <br>
+    {%endfor %}
+</div>
+
 {% endblock body%}
 
 <div class = "cloud cloud2">
