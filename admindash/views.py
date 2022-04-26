@@ -31,12 +31,12 @@ def admindashboard(request):
     cursor.execute(c)
     adminprofile = tuple(cursor.fetchall()) # use for profile
     print(adminprofile)
-    c = "select count(*),Hospitalname from pouch inner join hospital on hospital.PIN = pouch.HospitalPin group by hospitalname;"
+    c = "select count(*),Hospitalname from pouch inner join hospital on hospital.PIN = pouch.HospitalPin group by PIN;"
     cursor.execute(c)
     hospital_pouch_count = tuple(cursor.fetchall())
     print("count of pouches , hospital name")
     print(hospital_pouch_count)
-    c = "select count(*),Hospitalname from donationslot inner join hospital on hospital.PIN = donationslot.HPin group by hospitalname;"
+    c = "select count(*),Hospitalname from donationslot inner join hospital on hospital.PIN = donationslot.HPin group by PIN;"
     cursor.execute(c)
     hospital_slot_count = tuple(cursor.fetchall())
     print("count of slots , hospital name")
