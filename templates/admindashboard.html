@@ -208,7 +208,7 @@
                 </button>
             </td>
             <td style = "font-family:Comfortaa;font-size:17px;padding:10px;text-align:left">
-                <form method="post">
+                <form method="post" onsubmit="return confirm('Confirm deletion');">
                     {% csrf_token %}
                     <input type="hidden" name="hpin" value={{h.0}}  >
                     <input type="hidden" name="editordelete" value="delete"  >
@@ -223,7 +223,7 @@
             <td style = "padding:10px"></td>
         </tr>
         <tr id="hidden_row1{{h.0}}1" class="hidden_row" style = "display:none; padding:10px; background-color:#81D4FA; border-color:#4FC3F7">
-            <form method="post">
+            <form method="post" onsubmit="return confirm('Confirm edit');">
                 {% csrf_token %}
                 <input type="hidden" name="hpin" value={{h.0}}  >
                 <td style = "padding:10px">
