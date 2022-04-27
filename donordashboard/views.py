@@ -2,7 +2,7 @@ from email import message
 from django.shortcuts import render, redirect
 import mysql.connector as sql
 from django.contrib import messages
-
+from datetime import datetime, timedelta
 donorp = ''
 email = ''
 hPIN=''
@@ -25,6 +25,7 @@ def donorprofile(request):
 def donordashboard(request):
     global hPIN,dontime,dondate
     print(email)
+    present = datetime.today()
     if(email==''):
         return redirect("/")
     m = sql.connect(host="localhost",user="root",passwd="P@nky7050",database='dbmsproject')
@@ -32,7 +33,7 @@ def donordashboard(request):
     c = "select * from hospital"
     cursor.execute(c)
     hospitals = cursor.fetchall()
-    d="select * from donationslot inner join hospital on donationslot.HPin=hospital.PIN where DEmail='{}'".format(email)
+    d="select * from donationslot inner join hospital on donationslot.HPin=hospital.PIN where DEmail='{}' and donationtime>='{}'".format(email,present)
     cursor.execute(d)
     bookings = cursor.fetchall()
 

@@ -21,7 +21,7 @@ def authenticateadmin(var):
 
 def admindashboard(request):
     global hdel,option,hName,hContact,hAddress
-    m = sql.connect(host="localhost",user="root",passwd="Paranitrophenol@10",database='dbms_project')
+    m = sql.connect(host="localhost",user="root",passwd="P@nky7050",database='dbmsproject')
 
     cursor = m.cursor()
     c = "select * from hospital"
